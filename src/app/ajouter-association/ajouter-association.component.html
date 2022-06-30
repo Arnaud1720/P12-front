@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <form >
+        <div class="form-group">
+          <label >Nom association :</label>
+          <input type="text"  [(ngModel)]="newAsso.nom"
+                 class="form-control" >
+        </div>
+        <div class="form-floating">
+          <label>Description : </label>
+          <textarea class="form-control" [(ngModel)]="newAsso.description" placeholder="entrez vôtre texte ici" ></textarea>
+        </div>
+        <div class="form-group">
+          <label >Date de création :</label>
+          <input type="date" name="date_creation" [(ngModel)]="newAsso.dateCreation"
+                 class="form-control" >
+        </div>
+
+        <div class="row justify-content-md-center">
+          <button type="button"
+                  class="btn btn-success" (click)="addAsso()">Valider</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

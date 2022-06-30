@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="my-container-inscription card justify-content-center">
+    <div class="card">
+      <div class="card-header text-center  bg-primary arr ">
+        Inscription
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label  class="form-label">Nom</label>
+          <input type="text" name="fristName" [(ngModel)]="newUser.fristName" class="form-control"  placeholder="votre nom">
+        </div>
+        <div class="mb-3">
+          <div class="mb-3">
+            <label  class="form-label">Prenom</label>
+            <input type="text"  class="form-control" name="lastName"   [(ngModel)]="newUser.lastName" placeholder="votre prenom">
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">Email</label>
+            <input type="mail" name="email"  [(ngModel)]="newUser.email" class="form-control"  placeholder="****@****.***">
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">tel</label>
+            <input type="text" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" class="form-control"  placeholder="tel">
+          </div>
+          <div class="mb-3">
+            <label  class="form-label">adresse postale</label>
+            <input type="text"  name="adressePostal" [(ngModel)]="newUser.adressPostal" class="form-control"  placeholder="adresse postale">
+          </div>
+          <div class="mb-3">
+          <label  class="form-label">mot de passe</label>
+          <input type="password" name="password" [(ngModel)]="newUser.password" class="form-control"  placeholder="mot de passe">
+        </div>
+        <!--      Button-->
+        <div class="mb-3 d-flex justify-content-between">
+          <button type="submit" (click)="addUser()" class="btn btn-success">Inscription</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
