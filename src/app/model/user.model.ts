@@ -5,5 +5,6 @@ export class UserModel {
    adressPostal!:string;
   password!:string;
    email!:string;
-  roles!: string[] ;
+  username!:string;
+  roles!: string[];
 }

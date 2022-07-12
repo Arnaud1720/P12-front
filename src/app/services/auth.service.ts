@@ -1,51 +1,36 @@
 import { Injectable } from '@angular/core';
 import {UserModel} from "../model/user.model";
+import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  users:UserModel[]= [{"lastName":"arnaud",
-  "fristName":"Derisbourg",
-  "phoneNumber":"0312141411",
-  "adressPostal":"adresse de test",
-  "password":"1234",
-  "email":"arnaud1720@gmail.com",
-  "roles":['USER']},
-    {"lastName":"adm_admin",
-      "fristName":"Admin",
-      "phoneNumber":"0678414478",
-      "adressPostal":"adresse de adm",
-      "password":"123",
-      "email":"Admin@gmail.com",
-      "roles":['ADMIN']}
-
-  ]
-
-
+  apiURL: string = 'http://localhost:8080/asso';
+  token!: string ;
   public loggedUser!:string;
   public isloggedIn: Boolean = false;
   public roles!:string[];
 
-  constructor() { }
+  constructor(private router: Router,
+  private http : HttpClient) { }
 
 
-  SignIn(user :UserModel):Boolean{
-    let validUser: Boolean = false;
-    this.users.forEach((curUser) => {
-      if(user.fristName== curUser.fristName && user.password==curUser.password) {
-        validUser = true;
-        this.loggedUser = curUser.fristName;
-        this.isloggedIn = true;
-        this.roles = curUser.roles;
-        localStorage.setItem('loggedUser',this.loggedUser);
-        localStorage.setItem('isloggedIn',String(this.isloggedIn));
-        localStorage.setItem('roles',String(this.roles))
-      }
-    });
-    return validUser;
+  login(user : UserModel)
+  {
+    return this.http.post<HttpResponse<any>>(this.apiURL+'/login', user , {observe:'response'});
   }
+
+  saveToken(jwt: string ){
+    this.token = jwt;
+    localStorage.setItem('jwt',jwt);
+    this.isloggedIn = true;
+  }
+
+
 
   isAdmin():Boolean{
     if (!this.roles) //this.roles== undefiened

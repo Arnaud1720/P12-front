@@ -15,7 +15,7 @@ export class AssociationService {
   }
 
   afficheAssociation(): Observable<AssociationModel[]> {
-    return this.http.get<AssociationModel[]>(this.apiUrl);
+    return this.http.get<AssociationModel[]>(this.apiUrl,httpOptions);
   }
 
   supprimerAssociation(id: number) {
