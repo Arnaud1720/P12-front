@@ -5,7 +5,9 @@
   <title>Association</title>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
   <!-- Brand -->
   <a class="navbar-brand" href="#"></a>
   <!-- Links -->
@@ -18,11 +20,18 @@
       <a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown">
           association
       </a>
-      <div class="dropdown-menu">
+      <div class="dropdown-menu" >
         <a  class="dropdown-item" routerLink="list/association">Lister</a>
-        <a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="ajouter/association">Ajouter</a>
+        <a class="dropdown-item" routerLink="ajouter/association">Ajouter</a>
       </div>
-
+    <li class="nav-item dropdown" *ngIf="authService.isAdmin()">
+      <a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown">
+        Utilisateur
+      </a>
+    <div class="dropdown-menu">
+      <a  class="dropdown-item" routerLink="all">afficher tout les utilisateur</a>
+      <a  class="dropdown-item" routerLink="ajouter/association">supprimer un utilisateur</a>
+    </div>
     </li>
 
   </ul>
@@ -34,13 +43,15 @@
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" routerLink="login">login</a>
-        <a class="dropdown-item" href="#">logout</a>
-        <a class="dropdown-item" href="#">Profile</a>
+        <a class="dropdown-item" (click)="authService.logout()">logout</a>
+        <a class="dropdown-item"routerLink="profil">Profile</a>
         <a class="dropdown-item" routerLink="creation/utilisateur">inscription</a>
       </div>
     </li>
   </ul>
 </nav>
+<router-outlet></router-outlet>
+
 </body>
 </html>
-<router-outlet></router-outlet>
+

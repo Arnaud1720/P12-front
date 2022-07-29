@@ -1,0 +1,41 @@
+<p>page-utilisateurs works!</p>
+<div class="container ">
+  <div class="card shadow mb-4 mt-lg-5 text-center">
+    LISTE DES ASSOCIATIONS
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>nom</th>
+          <th>prenom</th>
+          <th>tel</th>
+          <th>adresse postal</th>
+          <th>email</th>
+          <th>pseudo</th>
+          <th>active</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let user of utilisateur">
+        <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.fristName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>{{user.adressPostal}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.enabled}}</td>
+
+
+
+
+
+        </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>

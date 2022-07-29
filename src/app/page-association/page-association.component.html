@@ -1,27 +1,48 @@
 <div class="container ">
-  <div class="card shadow mb-4 mt-lg-5 text-center">
-    LISTE DES ASSOCIATIONS
-    <div class="card-body">
-      <table class="table table-striped">
+  <ng-container *ngIf="association | async as listAssociation;else failureOrLoading">
+    <div class="card shadow mb-4 mt-lg-5 text-center">
+      LISTE DES ASSOCIATIONS
+      <div class="card-body">
+        <table class="table table-striped">
           <thead>
-            <tr>
-              <th>Id</th>
-              <th>nom</th>
-              <th>description</th>
-            </tr>
+          <tr>
+            <th>Id</th>
+            <th>nom</th>
+            <th>description</th>
+            <th>date de création</th>
+            <th>nombre d'adherents</th>
+            <th>devenir membre</th>
+          </tr>
           </thead>
-        <tbody *ngFor="let asso of association">
-        <tr>
-          <td>{{asso.id}}</td>
-          <td>{{asso.nom}}</td>
-          <td>{{asso.description}}</td>
-          <td><a class="btn btn-danger" (click)="supprimerAssociation(asso)"><i class="fa-solid fa-trash-can"></i></a> </td>
+          <tbody *ngFor="let asso of association |async">
+          <tr>
+            <td>{{asso.id}}</td>
+            <td>{{asso.idUser}}</td>
+            <td>{{asso.description}}</td>
+            <td>{{asso.dateCreation}}</td>
+            <td>{{asso.nbrAdherent}}</td>
+            <td><a  href="adherent"  class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
+            <!--          |date:"dd/MM/yyyy"-->
+            <td><a  *ngIf="authService.isAdmin()" class="btn btn-danger" ><i class="fa-solid fa-trash-can"></i></a> </td>
 
-        </tr>
+          </tr>
 
-        </tbody>
+          </tbody>
 
-      </table>
+        </table>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #failureOrLoading  >
+    <ng-container *ngIf="errorMessage;else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+
+    </ng-container>
+    <ng-template #loading>
+
+
+    </ng-template>
+  </ng-template>
 </div>

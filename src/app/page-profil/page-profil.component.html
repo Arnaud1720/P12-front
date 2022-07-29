@@ -1,0 +1,127 @@
+<!---->
+<html>
+
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="https://cdn-icons-png.flaticon.com/512/1094/1094625.png" alt=""/>
+          <div class="file btn btn-lg btn-primary">
+            changer photo de profil
+            <input type="file" name="file"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            Gestionaire 1
+          </h5>
+          <h6>
+           texte
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Association</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Modif profil"/>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-4">
+        <div class="profile-work">
+          <p>WORK LINK</p>
+          <a href="">facebook lien</a><br/>
+          <a href="">Discord lien</a><br/>
+          <a href="">Email de contact</a>
+          <p>Titre</p>
+          <a href="">?????</a><br/>
+
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Nom:</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.lastName}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Prenom:</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{user.fristName}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email:</label>
+              </div>
+              <div class="col-md-6">
+                <p>email@gmail.com</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>tel:</label>
+              </div>
+              <div class="col-md-6">
+                <p>0632887417</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Profession</label>
+              </div>
+              <div class="col-md-6">
+                <p>Web Developer and Designer</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Nom</label>
+              </div>
+              <div class="col-md-6">
+                <p>Nom Asso</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Description</label>
+              </div>
+              <div class="col-md-6">
+                <p>description Association</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Nombre d'haderent</label>
+              </div>
+              <div class="col-md-6">
+                <p>10</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</html>
+

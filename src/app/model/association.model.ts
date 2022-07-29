@@ -4,6 +4,9 @@ export class AssociationModel{
   id!:number
   nom!:string;
   description!:string;
-  users!:UserModel
   dateCreation!:Date
+  idUser!:UserModel
+  nbrAdherent:number=0;
+
+
 }

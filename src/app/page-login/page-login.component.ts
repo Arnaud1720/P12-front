@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {UserModel} from "../model/user.model";
+import {RoleModel} from "../model/role.model";
 
 @Component({
   selector: 'app-page-login',
@@ -16,39 +17,29 @@ export class PageLoginComponent implements OnInit {
               private router: Router) {
   }
 
-  // onLoggedin() {
-  //   this.authService.login(this.user).subscribe({
-  //     next: (data) => {
-  //       console.log(data)
-  //       // let jwToken = data.headers.get('Authorization')!;
-  //       let jwToken = data.headers.get('Authorization')!;
-  //
-  //       this.authService.saveToken(jwToken);
-  //
-  //       this.router.navigate(['/']);
-  //     },
-  //     error: (erreur: any) => {
-  //       this.erreur = 1;
-  //     }
-  //   });
-  // }
-
   onLoggedin() {
-    this.authService.login(this.user).subscribe((data) => {
+    this.authService.login(this.user).subscribe({
+      next: (data) => {
         console.log(data)
         // let jwToken = data.headers.get('Authorization')!;
         let jwToken = data.headers.get('Authorization')!;
-
         this.authService.saveToken(jwToken);
 
         this.router.navigate(['/']);
       },
-      (erreur: any) => {
+      error: (erreur: any) => {
         this.erreur = 1;
-      });
+      }
+    });
   }
 
+
   ngOnInit(): void {
+
+    this.authService.loadToken();
+    if (this.authService.getToken()==null ||
+      this.authService.isTokenExpired())
+      this.router.navigate(['/login']);
   }
 
 }
