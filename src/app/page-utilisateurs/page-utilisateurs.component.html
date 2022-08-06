@@ -1,8 +1,22 @@
-<p>page-utilisateurs works!</p>
+
 <div class="container ">
-  <div class="card shadow mb-4 mt-lg-5 text-center">
-    LISTE DES ASSOCIATIONS
+<ng-container *ngIf="utilisateur|async as listUse;else failureOrLoading">
+  <div class=" card shadow mb-4 mt-lg-5 text-center">
+    <div class="card-header text">
+      LISTE DES Utilisateur
+    </div>
     <div class="card-body">
+      <div *ngIf="searchFormGroup">
+        {{this.searchFormGroup.value|json}}
+        <form [formGroup]="searchFormGroup" (ngSubmit)="searchUser()" >
+          <div class="input-group w-50 mb-3" >
+            <label class="input-group-text">mot clé</label>
+            <input type="text" formControlName="keyword" class="form-control">
+            <button class="btn btn-info ml-3"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+      </div>
+
       <table class="table table-striped">
         <thead>
         <tr>
@@ -13,10 +27,10 @@
           <th>adresse postal</th>
           <th>email</th>
           <th>pseudo</th>
-          <th>active</th>
+          <th>supprimer</th>
         </tr>
         </thead>
-        <tbody *ngFor="let user of utilisateur">
+        <tbody *ngFor="let user of utilisateur|async">
         <tr>
           <td>{{user.id}}</td>
           <td>{{user.fristName}}</td>
@@ -25,12 +39,14 @@
           <td>{{user.adressPostal}}</td>
           <td>{{user.email}}</td>
           <td>{{user.username}}</td>
-          <td>{{user.enabled}}</td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="onClickUpdate(user.id)"><i class="fa-solid fa-chevron-up"></i></button>
+            <button class="btn btn-danger" (click)="supprimerUtilisateur(user)"><i class="fa-solid fa-trash"></i></button>
 
+          </td>
+          <td>
 
-
-
-
+          </td>
         </tr>
 
         </tbody>
@@ -38,4 +54,20 @@
       </table>
     </div>
   </div>
+</ng-container>
+  <ng-template #failureOrLoading  >
+    <ng-container *ngIf="errorMessage;else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center mt-lg-5">
+        <h4>chargement</h4>
+        <progress></progress>
+      </div>
+    </ng-template>
+  </ng-template>
+
 </div>

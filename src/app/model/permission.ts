@@ -1,4 +1,4 @@
-export class PermissionModel {
+export class Permission {
   id!:number;
   name!:string;
 }

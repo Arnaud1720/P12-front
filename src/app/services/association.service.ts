@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AssociationModel} from "../model/association.model";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Association} from "../model/association";
 import {Observable} from "rxjs";
 import {AuthService} from "./auth.service";
+import {environment} from "../../environments/environment";
+import {User} from "../model/user";
+import {UserService} from "./user.service";
 const httpOptions={
   headers: new HttpHeaders( {'Content-Type': 'application/json'})
 }
@@ -12,32 +15,33 @@ const httpOptions={
 export class AssociationService {
   apiUrl: string = "http://localhost:8080/asso/association";
 
-  constructor(private http: HttpClient,private authService:AuthService) {
+  constructor(public userService:UserService,private http: HttpClient,private authService:AuthService) {
   }
 
-  afficheAssociation(): Observable<Array<AssociationModel>> {
+  afficheAssociation(): Observable<Array<Association>> {
   let jwt = this.authService.getToken();
   jwt="Bearer "+jwt;
   let httpHeader= new HttpHeaders({"Authorization":jwt})
-    return this.http.get<Array<AssociationModel>>(this.apiUrl+"/all",{headers:httpHeader});
+    return this.http.get<Array<Association>>(environment.backendHost+"/association/all",{headers:httpHeader});
 
   }
 
 
 
   supprimerAssociation(idAsso :number) {
-    const url = `${this.apiUrl}/save/${idAsso}`;
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.delete(url, {headers:httpHeaders})
+    let httpHeader = new HttpHeaders({"Authorization":jwt})
+    return this.http.delete(environment.backendHost+"/association/"+idAsso, {headers:httpHeader})
   }
 
-  ajouterAssociation(idUser:number,idAsso:number,asso:AssociationModel):Observable<AssociationModel>{
-    const url = `${this.apiUrl}/save/${idUser}/${idAsso}`;
+
+  saveAsso(id: number,asso:Association):Observable<Association> {
     let jwt = this.authService.getToken();
+    const idUser = this.userService.getUserById(id)
     jwt = "Bearer "+jwt;
+    // let params = new HttpParams().set('idUser', idUser);
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.post<AssociationModel>(url,asso,{headers:httpHeaders})
+    return this.http.post<Association>(environment.backendHost+"/association"+"/save"+`/${idUser}`,{headers:httpHeaders})
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {UserModel} from "../model/user.model";
+import {User} from "../model/user";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -19,7 +19,7 @@ export class AuthService {
   private http : HttpClient) { }
 
 
-  login(user : UserModel)
+  login(user : User)
   {
     return this.http.post<HttpResponse<any>>(this.apiURL+'/login', user , {observe:'response'});
   }

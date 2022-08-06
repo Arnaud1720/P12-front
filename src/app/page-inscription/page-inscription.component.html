@@ -1,46 +1,92 @@
-<div class="container">
-  <div class="my-container-inscription card justify-content-center">
-    <div class="card">
-      <div class="card-header text-center  bg-primary arr ">
-        Inscription
-      </div>
-      <div class="card-body">
+<div class="container w-50 mt-4">
+  <div class="card-header">
+    Inscription
+  </div>
+  <div class="card-body">
+    <form [formGroup]="newUserFormGroup" (ngSubmit)="saveUser()" >
         <div class="mb-3">
-          <label  class="form-label">Nom</label>
-          <input type="text" name="fristName" [(ngModel)]="newUser.fristName" class="form-control"  placeholder="votre nom">
+          <label class="form-label">Nom:</label>
+          <input type="text" formControlName="lastName" class="form-control">
+          <span class="text-danger"
+                *ngIf="newUserFormGroup.controls['lastName'].touched
+          &&newUserFormGroup.controls['lastName'].errors
+          && newUserFormGroup.controls['lastName'].errors!['required']">
+          Nom requis pour valider le formulaire
+        </span>
         </div>
-        <div class="mb-3">
-          <div class="mb-3">
-            <label  class="form-label">Prenom</label>
-            <input type="text"  class="form-control" name="lastName"   [(ngModel)]="newUser.lastName" placeholder="votre prenom">
-          </div>
-          <div class="mb-3">
-            <label  class="form-label">Email</label>
-            <input type="mail" name="email"  [(ngModel)]="newUser.email" class="form-control"  placeholder="****@****.***">
-          </div>
-          <div class="mb-3">
-            <label  class="form-label">pseudo</label>
-            <input type="text" name="phoneNumber" [(ngModel)]="newUser.username" class="form-control"  placeholder="pseudo">
-          </div>
-          <div class="mb-3">
-            <label  class="form-label">tel</label>
-            <input type="text" name="phoneNumber" [(ngModel)]="newUser.phoneNumber" class="form-control"  placeholder="tel">
-          </div>
-          <div class="mb-3">
-            <label  class="form-label">adresse postale</label>
-            <input type="text"  name="adressePostal" [(ngModel)]="newUser.adressPostal" class="form-control"  placeholder="adresse postale">
-          </div>
-          <div class="mb-3">
-          <label  class="form-label">mot de passe</label>
-          <input type="password" name="password" [(ngModel)]="newUser.password" class="form-control"  placeholder="mot de passe">
-        </div>
-        <!--      Button-->
-        <div class="mb-3 d-flex justify-content-between">
-          <button type="submit" (click)="addUser()" class="btn btn-success">Inscription</button>
-        </div>
+      <div class="mb-3">
+        <label class="form-label">prenom:</label>
+        <input type="text" formControlName="fristName" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['fristName'].touched
+          &&newUserFormGroup.controls['fristName'].errors
+          && newUserFormGroup.controls['fristName'].errors!['required']">
+          Prénom requis pour valider le formulaire
+        </span>
       </div>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">tel:</label>
+        <input type="text" formControlName="phoneNumber" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['phoneNumber'].touched
+          &&newUserFormGroup.controls['phoneNumber'].errors
+          && newUserFormGroup.controls['phoneNumber'].errors!['required']">
+          N° requis pour valider le formulaire
+        </span>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">adresse postale:</label>
+        <input type="text" formControlName="adressPostal" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['adressPostal'].touched
+          &&newUserFormGroup.controls['adressPostal'].errors
+          && newUserFormGroup.controls['adressPostal'].errors!['required']">
+          adresse postale requise pour valider le formulaire
+        </span>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">mot de passe:</label>
+        <input type="password" formControlName="password" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['password'].touched
+          &&newUserFormGroup.controls['password'].errors
+          && newUserFormGroup.controls['password'].errors!['required']">
+        le mot de passe ne peu pas  être inférieur a 4 caractère
+        </span>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">email:</label>
+        <input type="email" formControlName="email" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['email'].touched
+          &&newUserFormGroup.controls['email'].errors
+          && newUserFormGroup.controls['email'].errors!['email']">
+          email non valide
+        </span>
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['email'].touched
+          &&newUserFormGroup.controls['email'].errors
+          && newUserFormGroup.controls['email'].errors!['minLength']">
+          l'email ne peu pas être inférieur a 5 caractère
+        </span>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">pseudo:</label>
+        <input type="text" formControlName="username" class="form-control">
+        <span class="text-danger"
+              *ngIf="newUserFormGroup.controls['username'].touched
+          &&newUserFormGroup.controls['username'].errors
+          && newUserFormGroup.controls['username'].errors!['required']">
+          Pseudonyme requis pour valider le formulaire
+        </span>
+      </div>
+      <div  class="mb-2 d-flex justify-content-between">
+
+        <button [disabled]="!newUserFormGroup.valid"  class="btn btn-info" type="submit">save</button>
+        <input class="btn btn-primary " type="reset" value="Reset">
+
+      </div>
+    </form>
 
   </div>
-</div>
 </div>

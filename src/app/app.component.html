@@ -29,8 +29,8 @@
         Utilisateur
       </a>
     <div class="dropdown-menu">
-      <a  class="dropdown-item" routerLink="all">afficher tout les utilisateur</a>
-      <a  class="dropdown-item" routerLink="ajouter/association">supprimer un utilisateur</a>
+      <a  class="dropdown-item" routerLink="users">afficher tout les utilisateur</a>
+      <a  class="dropdown-item" routerLink="">recherche utilisateur</a>
     </div>
     </li>
 
@@ -44,7 +44,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" routerLink="login">login</a>
         <a class="dropdown-item" (click)="authService.logout()">logout</a>
-        <a class="dropdown-item"routerLink="profil">Profile</a>
+        <a class="dropdown-item" routerLink="users/:id">Profile</a>
         <a class="dropdown-item" routerLink="creation/utilisateur">inscription</a>
       </div>
     </li>

@@ -14,10 +14,13 @@ const routes: Routes = [
   {path:"list/association",component:PageAssociationComponent},
   {path:"login",component:PageLoginComponent},
   {path:"ajouter/association",component:AjouterAssociationComponent},
-  {path:"profil",component:PageProfilComponent},
-  {path:"all",component:PageUtilisateursComponent},
+  {path:'users',
+    children:[
+      {path:'',component:PageUtilisateursComponent},
+      {path:':id', component:PageProfilComponent}]
+  },
   {path:"adherent",component:PageAdherentComponent},
-  { path: "", redirectTo: "", pathMatch: "full"}
+  { path: "", redirectTo: "/", pathMatch: "full"}
 ];
 
 @NgModule({

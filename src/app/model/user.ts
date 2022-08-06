@@ -1,4 +1,4 @@
-export class UserModel {
+export class User {
   id!: number
   lastName!: string;
   fristName!: string;
@@ -7,6 +7,6 @@ export class UserModel {
   password!: string;
   email!: string;
   username!: string;
-  roles!: string[];
+  roles!: string;
   enabled!: boolean;
 }

@@ -1,6 +1,6 @@
 <div class="container ">
   <ng-container *ngIf="association | async as listAssociation;else failureOrLoading">
-    <div class="card shadow mb-4 mt-lg-5 text-center">
+    <div class="card-header shadow mb-4 mt-lg-5 text-center">
       LISTE DES ASSOCIATIONS
       <div class="card-body">
         <table class="table table-striped">
@@ -19,12 +19,10 @@
             <td>{{asso.id}}</td>
             <td>{{asso.idUser}}</td>
             <td>{{asso.description}}</td>
-            <td>{{asso.dateCreation}}</td>
+            <td>{{asso.dateCreation|date:"yyyy-MM-dd HH:mm"}}</td>
             <td>{{asso.nbrAdherent}}</td>
-            <td><a  href="adherent"  class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
-            <!--          |date:"dd/MM/yyyy"-->
-            <td><a  *ngIf="authService.isAdmin()" class="btn btn-danger" ><i class="fa-solid fa-trash-can"></i></a> </td>
-
+            <td><a  routerLink="/adherent" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
+            <td><button *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteAsso(asso)"><i class="fa-solid fa-trash-can"></i></button></td>
           </tr>
 
           </tbody>
@@ -41,8 +39,10 @@
 
     </ng-container>
     <ng-template #loading>
-
-
+      <div class="text-center mt-lg-5">
+        <h4>chargement</h4>
+      <progress></progress>
+      </div>
     </ng-template>
   </ng-template>
 </div>

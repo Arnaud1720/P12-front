@@ -1,1 +1,46 @@
-<p>page-adherent works!</p>
+<div class="container w-50 mt-4">
+  <div class="card-header">
+    Inscription
+  </div>
+  <div class="card-body">
+    <form [formGroup]="adherentFormGroup" (ngSubmit)="saveAdherent()" >
+      <div class="mb-3">
+        <label class="form-label">Nom:</label>
+        <input type="text" formControlName="nom" class="form-control">
+        <span class="text-danger"
+              *ngIf="adherentFormGroup.controls['nom'].touched
+          &&adherentFormGroup.controls['nom'].errors
+          && adherentFormGroup.controls['nom'].errors!['required']">
+          Nom adherent requis pour valider le formulaire
+        </span>
+      </div>
+<!--      <div class="mb-3">-->
+<!--        <label class="form-label">debut:</label>-->
+<!--        <input type="date" formControlName="licenseStart" class="form-control">-->
+<!--        <span class="text-danger"-->
+<!--              *ngIf="adherentFormGroup.controls['licenseStart'].touched-->
+<!--          &&adherentFormGroup.controls['licenseStart'].errors-->
+<!--          && adherentFormGroup.controls['licenseStart'].errors!['required']">-->
+<!--          date requis pour valider le formulaire-->
+<!--        </span>-->
+<!--      </div>-->
+<!--      <div class="mb-3">-->
+<!--        <label class="form-label">fin:</label>-->
+<!--        <input type="date" formControlName="licenseStop" class="form-control">-->
+<!--        <span class="text-danger"-->
+<!--              *ngIf="adherentFormGroup.controls['licenseStop'].touched-->
+<!--          &&adherentFormGroup.controls['licenseStop'].errors-->
+<!--          && adherentFormGroup.controls['licenseStop'].errors!['required']">-->
+<!--          N° requis pour valider le formulaire-->
+<!--        </span>-->
+<!--      </div>-->
+      <div  class="mb-2 d-flex justify-content-between">
+
+        <button [disabled]="!adherentFormGroup.valid"  class="btn btn-info" type="submit">save</button>
+        <input class="btn btn-primary " type="reset" value="Reset">
+
+      </div>
+    </form>
+
+  </div>
+</div>

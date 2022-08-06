@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth.service";
-import {UserModel} from "../model/user.model";
 import {UserService} from "../services/user.service";
+import {map, Subscription} from "rxjs";
+import {User} from "../model/user";
+import {ActivatedRoute} from "@angular/router";
+
+
 
 @Component({
   selector: 'app-page-profil',
@@ -9,17 +12,25 @@ import {UserService} from "../services/user.service";
   styleUrls: ['./page-profil.component.css']
 })
 export class PageProfilComponent implements OnInit {
-  user=new UserModel();
 
-  constructor(public userService:UserService) { }
+  userId!:number
+  user!:User;
+  constructor(private userService:UserService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+  this.getProfilById()
 
 
   }
-  chargerUnUtilisateur() {
-    //appel service
 
+  getProfilById()
+  {
+    this.activatedRoute.params.subscribe(params=>{
+      this.userId=parseInt(params['id']);
+      this.userService.getUserById(this.userId).pipe(
+        map((user:User)=>this.user=user)
+      ).subscribe()
+    })
   }
 
 }

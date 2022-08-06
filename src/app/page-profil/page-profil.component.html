@@ -1,7 +1,7 @@
 <!---->
 <html>
 
-<div class="container emp-profile">
+<div class="container emp-profile" *ngIf="user">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -16,7 +16,7 @@
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            Gestionaire 1
+            {{user.username}}
           </h5>
           <h6>
            texte
@@ -47,6 +47,7 @@
 
         </div>
       </div>
+
       <div class="col-md-8">
         <div class="tab-content profile-tab" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -55,7 +56,7 @@
                 <label>Nom:</label>
               </div>
               <div class="col-md-6">
-                <p>{{user.lastName}}</p>
+                  {{user.fristName}}
               </div>
             </div>
             <div class="row">
@@ -63,7 +64,7 @@
                 <label>Prenom:</label>
               </div>
               <div class="col-md-6">
-                <p>{{user.fristName}}</p>
+                <p>{{user.lastName}}</p>
               </div>
             </div>
             <div class="row">
@@ -71,7 +72,7 @@
                 <label>Email:</label>
               </div>
               <div class="col-md-6">
-                <p>email@gmail.com</p>
+                <p>{{user.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -79,15 +80,15 @@
                 <label>tel:</label>
               </div>
               <div class="col-md-6">
-                <p>0632887417</p>
+                <p>{{user.phoneNumber}}</p>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <label>Profession</label>
+                <label>Role</label>
               </div>
               <div class="col-md-6">
-                <p>Web Developer and Designer</p>
+                <p>{{}}</p>
               </div>
             </div>
           </div>

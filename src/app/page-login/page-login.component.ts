@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
-import {UserModel} from "../model/user.model";
-import {RoleModel} from "../model/role.model";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-page-login',
@@ -10,7 +9,7 @@ import {RoleModel} from "../model/role.model";
   styleUrls: ['./page-login.component.css']
 })
 export class PageLoginComponent implements OnInit {
-  user = new UserModel();
+  user = new User();
   erreur: number = 0;
 
   constructor(private authService: AuthService,

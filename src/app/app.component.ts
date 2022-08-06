@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from "./services/auth.service";
 import {Route, Router} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,18 @@ import {Route, Router} from "@angular/router";
 export class AppComponent {
   title = 'front-association';
 
-constructor(public authService:AuthService, private router:Router)
+constructor(public userServe:UserService,public authService:AuthService, private router:Router)
 {
 
 }
 
-  ngOnInit () {
+  ngOnInit ():void {
+
     this.authService.loadToken();
     if (this.authService.getToken()==null ||
       this.authService.isTokenExpired())
       this.router.navigate(['/login']);
   }
+
+
 }

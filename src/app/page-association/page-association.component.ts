@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AssociationService} from "../services/association.service";
-import {AssociationModel} from "../model/association.model";
+import {Association} from "../model/association";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {catchError, Observable, throwError} from "rxjs";
+import {UserService} from "../services/user.service";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-page-association',
@@ -13,40 +15,34 @@ import {catchError, Observable, throwError} from "rxjs";
 })
 export class PageAssociationComponent implements OnInit {
 
-  association!:Observable<Array<AssociationModel>>;
+  association!:Observable<Array<Association>>;
   errorMessage!:string;
-
   constructor(public authService:AuthService, private associationService:AssociationService, private router:Router) { }
 
   ngOnInit(): void {
-      this.association=this.associationService.afficheAssociation().pipe(
-        catchError(err => {
-              this.errorMessage=err.message;
-          return throwError(err);
-        })
-      )
+      this.afficheAssociation()
   }
 
-   // chargerAssociation(){
-   //   this.associationService.afficheAssociation().subscribe(asso=>{
-   //     console.log(asso)
-   //     this.association=asso;
-   //   })
-   // }
+  afficheAssociation(){
+    this.association=this.associationService.afficheAssociation().pipe(
+      catchError(err => {
+        this.errorMessage=err.message;
+        return throwError(err);
+      })
+    )
+  }
 
-
-   // supprimerAssociation(a:AssociationModel){
-   //  let conf = confirm("Etes-vous sur? ");
-   //  if(conf){
-   //    this.associationService.supprimerAssociation(a.id).subscribe(()=>{
-   //        console.log("produit supprimer")
-   //          this.chargerAssociation();
-   //        this.router.navigate(['list/association'])
-   //    }
-   //
-   //    )
-   //  }
-   // }
-
+  deleteAsso(asso:Association) {
+    let conf=confirm("etes-vous sur .?")
+    if(!conf)return;
+    this.associationService.supprimerAssociation(asso.id).subscribe({
+      next: resp => {
+        this.afficheAssociation();
+      },
+      error:err => {
+        console.log(err)
+      }
+    })
+  }
 }
 
