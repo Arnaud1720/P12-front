@@ -3,6 +3,8 @@ import {AuthService} from "./services/auth.service";
 import {Route, Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserService} from "./services/user.service";
+import {User} from "./model/user";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,9 @@ import {UserService} from "./services/user.service";
 })
 export class AppComponent {
   title = 'front-association';
+  user!:Observable<User>;
 
-constructor(public userServe:UserService,public authService:AuthService, private router:Router)
+constructor(public authService:AuthService, private router:Router)
 {
 
 }

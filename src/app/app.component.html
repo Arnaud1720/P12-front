@@ -22,7 +22,7 @@
       </a>
       <div class="dropdown-menu" >
         <a  class="dropdown-item" routerLink="list/association">Lister</a>
-        <a class="dropdown-item" routerLink="ajouter/association">Ajouter</a>
+        <a class="dropdown-item" [routerLink]="['ajouter/association']">Ajouter</a>
       </div>
     <li class="nav-item dropdown" *ngIf="authService.isAdmin()">
       <a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown">
@@ -44,7 +44,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" routerLink="login">login</a>
         <a class="dropdown-item" (click)="authService.logout()">logout</a>
-        <a class="dropdown-item" routerLink="users/:id">Profile</a>
+        <a class="dropdown-item"  [routerLink]="['users/:id']">Profile</a>
         <a class="dropdown-item" routerLink="creation/utilisateur">inscription</a>
       </div>
     </li>

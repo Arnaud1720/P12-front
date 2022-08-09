@@ -1,7 +1,7 @@
 <!---->
 <html>
 
-<div class="container emp-profile" *ngIf="user">
+<div class="container emp-profile" *ngIf="currentUser">
   <form method="post">
     <div class="row">
       <div class="col-md-4">
@@ -16,7 +16,7 @@
       <div class="col-md-6">
         <div class="profile-head">
           <h5>
-            {{user.username}}
+            {{currentUser.username}}
           </h5>
           <h6>
            texte
@@ -56,7 +56,7 @@
                 <label>Nom:</label>
               </div>
               <div class="col-md-6">
-                  {{user.fristName}}
+                  {{currentUser.fristName}}
               </div>
             </div>
             <div class="row">
@@ -64,7 +64,7 @@
                 <label>Prenom:</label>
               </div>
               <div class="col-md-6">
-                <p>{{user.lastName}}</p>
+                <p>{{currentUser.lastName}}</p>
               </div>
             </div>
             <div class="row">
@@ -72,7 +72,7 @@
                 <label>Email:</label>
               </div>
               <div class="col-md-6">
-                <p>{{user.email}}</p>
+                <p>{{currentUser.email}}</p>
               </div>
             </div>
             <div class="row">
@@ -80,7 +80,7 @@
                 <label>tel:</label>
               </div>
               <div class="col-md-6">
-                <p>{{user.phoneNumber}}</p>
+                <p>{{currentUser.phoneNumber}}</p>
               </div>
             </div>
             <div class="row">
@@ -88,7 +88,6 @@
                 <label>Role</label>
               </div>
               <div class="col-md-6">
-                <p>{{}}</p>
               </div>
             </div>
           </div>

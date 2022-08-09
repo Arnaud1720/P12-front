@@ -34,7 +34,7 @@ export class PageInscriptionComponent implements OnInit {
 
   saveUser() {
     let user:User = this.newUserFormGroup.value
-    this.userService.ajouterUtilisateur(user).subscribe({
+    this.userService.addUser(user).subscribe({
       next:user=>{
         alert("utilisateur enregister avec suces ");
         this.newUserFormGroup.reset();

@@ -5,6 +5,8 @@ import {AssociationService} from "../services/association.service";
 import {catchError, Observable, throwError} from "rxjs";
 import {User} from "../model/user";
 import {UserService} from "../services/user.service";
+import {ActivatedRoute, Routes} from "@angular/router";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-ajouter-association',
@@ -14,17 +16,22 @@ import {UserService} from "../services/user.service";
 export class AjouterAssociationComponent implements OnInit {
   newAssociationFormGroup!:FormGroup;
   private errorMessage!: string;
-  public user!:User
+  public currentUser = new User();
+  public username="test";
 
-
-  constructor(private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
+  constructor(private auth:AuthService,private activatedRoute:ActivatedRoute,private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
 
   ngOnInit(): void {
+
     this.chargerForm()
 
   }
 
   private chargerForm(){
+    this.userService.consulterUtilisateurParPseudo(this.activatedRoute.snapshot.params['username']).subscribe(
+      user => {
+        this.currentUser = user
+      })
     this.newAssociationFormGroup=this.fb.group(
       {
         nom:this.fb.control(null,[Validators.required,Validators.maxLength(40)]),
@@ -37,11 +44,14 @@ export class AjouterAssociationComponent implements OnInit {
     )
   }
 
-  saveAsso(iduser:number) {
+  saveAsso(username:string) {
+
     let asso:Association = this.newAssociationFormGroup.value
-    let idUser=this.userService.getUserById(iduser)
-    this.assoService.saveAsso(iduser,asso).subscribe({
-      next:date=>{
+
+    this.assoService.saveAsso(username,asso).subscribe({
+      next:data=>{
+
+        console.log(data)
         alert("asso crée avec succes")
         this.newAssociationFormGroup.reset()
 

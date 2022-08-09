@@ -40,10 +40,11 @@
           <td>{{user.email}}</td>
           <td>{{user.username}}</td>
           <td>
-            <button class="btn btn-success btn-sm" (click)="onClickUpdate(user.id)"><i class="fa-solid fa-chevron-up"></i></button>
-            <button class="btn btn-danger" (click)="supprimerUtilisateur(user)"><i class="fa-solid fa-trash"></i></button>
+          <td>
+          <a class="btn btn-success w-100 " [routerLink]="['/users/user/update/',user.id]"><i class="fa-solid fa-chevron-up"></i>Modifier</a></td>
 
-          </td>
+          <button class="btn btn-danger w-" (click)="supprimerUtilisateur(user)"><i class="fa-solid fa-trash"></i></button>
+
           <td>
 
           </td>

@@ -12,25 +12,17 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./page-profil.component.css']
 })
 export class PageProfilComponent implements OnInit {
+  currentUser = new User();
 
-  userId!:number
-  user!:User;
-  constructor(private userService:UserService,private activatedRoute:ActivatedRoute) { }
-
-  ngOnInit(): void {
-  this.getProfilById()
-
-
+  constructor(private userService: UserService, private activatedRoute: ActivatedRoute) {
   }
 
-  getProfilById()
-  {
-    this.activatedRoute.params.subscribe(params=>{
-      this.userId=parseInt(params['id']);
-      this.userService.getUserById(this.userId).pipe(
-        map((user:User)=>this.user=user)
-      ).subscribe()
-    })
+  ngOnInit(): void {
+    this.userService.consulterUtilisateur(this.activatedRoute.snapshot.params['id']).subscribe(
+      user => {
+        this.currentUser = user
+      }
+    )
   }
 
 }

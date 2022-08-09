@@ -7,6 +7,7 @@ import {AjouterAssociationComponent} from "./ajouter-association/ajouter-associa
 import {PageProfilComponent} from "./page-profil/page-profil.component";
 import {PageUtilisateursComponent} from "./page-utilisateurs/page-utilisateurs.component";
 import {PageAdherentComponent} from "./page-adherent/page-adherent.component";
+import {PageUpdateUserComponent} from "./page-update-user/page-update-user.component";
 
 const routes: Routes = [
   {path:"creation/utilisateur",component:PageInscriptionComponent},
@@ -17,12 +18,13 @@ const routes: Routes = [
   {path:'users',
     children:[
       {path:'',component:PageUtilisateursComponent},
-      {path:':id', component:PageProfilComponent}]
+      {path:':id', component:PageProfilComponent},
+    ],
   },
+  {path:'users/user/update/:id', component:PageUpdateUserComponent},
   {path:"adherent",component:PageAdherentComponent},
   { path: "", redirectTo: "/", pathMatch: "full"}
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

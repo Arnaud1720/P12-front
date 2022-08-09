@@ -13,7 +13,6 @@ const httpOptions={
 
 export class UserService {
 
-  apiUrl: string = "http://localhost:8080/asso/user/save";
 
 
   constructor(private http: HttpClient,private authService:AuthService) {
@@ -21,38 +20,80 @@ export class UserService {
 
   }
 
-  getUserById(id: number):Observable<User>{
-    let jwt = this.authService.getToken();
-    jwt = "Bearer "+jwt;
-    let httpHeader = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeader}).pipe(
-      map((user:User)=>user))
-  }
+  // getUserById(id: number):Observable<User>{
+  //   let jwt = this.authService.getToken();
+  //   jwt = "Bearer "+jwt;
+  //   let httpHeader = new HttpHeaders({"Authorization":jwt})
+  //   return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeader}).pipe(
+  //     map((user:User)=>user))
+  // }
 
-  ajouterUtilisateur(user: User): Observable<User> {
+
+  addUser(user: User): Observable<User> {
     return this.http.post<User>(environment.backendHost+"/user/save",user)
   }
 
-  afficherToutlesUtilisateur():Observable<Array<User>>{
+  displayAllUsers():Observable<Array<User>>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get<Array<User>>(environment.backendHost+"/user/all");
   }
 
-  chercherUtilisateur(keyword:string):Observable<Array<User>>{
+  /**
+   * Recherche ok
+   * @param keyword
+   */
+  searchUser(keyword:string):Observable<Array<User>>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<Array<User>>(environment.backendHost+"/user/search?keyword="+keyword)
+    return this.http.get<Array<User>>(environment.backendHost+"/user/search?keyword="+keyword,{headers:httpHeaders})
   }
-  supprimerUtilisateur(id:number){
+
+  /**
+   *
+   * @param id
+   * Etat Ok
+   */
+  deleteUser(id:number){
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeader = new HttpHeaders({"Authorization":jwt})
     return this.http.delete(environment.backendHost+"/user/"+id,{headers:httpHeader})
   }
 
+  consulterUtilisateur(id:number):Observable<User> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeaders})
+  }
+
+  consulterUtilisateurParPseudo(username:string):Observable<User> {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<User>(environment.backendHost+"/user/"+`${username}`,{headers:httpHeaders})
+  }
+
+  /**
+   * Etat : ok
+   * @param currentUser
+   */
+  updateUser(currentUser:User):Observable<User>
+  {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.put<User>(environment.backendHost+"/user/update",currentUser,{headers:httpHeaders})
+  }
+
+  /**
+   * Err perso OK
+   * @param httpError
+   * @private
+   */
   private handleError(httpError: HttpErrorResponse) {
     if (httpError.error instanceof ErrorEvent) {
       console.error('An error occurred:', httpError.error.message);

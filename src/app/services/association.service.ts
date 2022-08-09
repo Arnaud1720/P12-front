@@ -36,12 +36,12 @@ export class AssociationService {
   }
 
 
-  saveAsso(id: number,asso:Association):Observable<Association> {
+  saveAsso(username: string,asso:Association):Observable<Association> {
     let jwt = this.authService.getToken();
-    const idUser = this.userService.getUserById(id)
     jwt = "Bearer "+jwt;
     // let params = new HttpParams().set('idUser', idUser);
+    let params = new HttpParams().set('username', username);
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.post<Association>(environment.backendHost+"/association"+"/save"+`/${idUser}`,{headers:httpHeaders})
+    return this.http.post<Association>(environment.backendHost+"/association/save"+{parms:params},asso,{headers:httpHeaders})
   }
 }

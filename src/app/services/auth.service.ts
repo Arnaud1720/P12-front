@@ -36,9 +36,12 @@ export class AuthService {
     return;
     const decodedToken = this.helper.decodeToken(this.token);
     this.roles = decodedToken.roles;
-    this.loggedUser = decodedToken.sub;
+    console.log(this.roles)
+    this.loggedUser = decodedToken.username;
+    console.log(this.loggedUser)
 
   }
+
 
   loadToken() {
     this.token = localStorage.getItem('jwt')!;
