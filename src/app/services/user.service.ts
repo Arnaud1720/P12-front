@@ -12,7 +12,7 @@ const httpOptions={
 })
 
 export class UserService {
-
+  id!:string
 
 
   constructor(private http: HttpClient,private authService:AuthService) {
@@ -20,13 +20,13 @@ export class UserService {
 
   }
 
-  // getUserById(id: number):Observable<User>{
-  //   let jwt = this.authService.getToken();
-  //   jwt = "Bearer "+jwt;
-  //   let httpHeader = new HttpHeaders({"Authorization":jwt})
-  //   return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeader}).pipe(
-  //     map((user:User)=>user))
-  // }
+  getUserById(id: number):Observable<User>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeader = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeader}).pipe(
+      map((user:User)=>user))
+  }
 
 
   addUser(user: User): Observable<User> {
@@ -72,9 +72,11 @@ export class UserService {
 
   consulterUtilisateurParPseudo(username:string):Observable<User> {
     let jwt = this.authService.getToken();
+    // recupération claims username
+
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<User>(environment.backendHost+"/user/"+`${username}`,{headers:httpHeaders})
+    return this.http.get<User>(environment.backendHost+"/user/",{headers:httpHeaders})
   }
 
   /**

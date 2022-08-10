@@ -13,7 +13,6 @@ const httpOptions={
   providedIn: 'root'
 })
 export class AssociationService {
-  apiUrl: string = "http://localhost:8080/asso/association";
 
   constructor(public userService:UserService,private http: HttpClient,private authService:AuthService) {
   }
@@ -36,12 +35,12 @@ export class AssociationService {
   }
 
 
-  saveAsso(username: string,asso:Association):Observable<Association> {
+  saveAsso(asso:Association):Observable<Association> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    // let params = new HttpParams().set('idUser', idUser);
-    let params = new HttpParams().set('username', username);
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.post<Association>(environment.backendHost+"/association/save"+{parms:params},asso,{headers:httpHeaders})
+    let username = localStorage.getItem("username")
+    return this.http.post<Association>(environment.backendHost+"/association/save/"+username,asso,
+      {headers:httpHeaders})
   }
 }

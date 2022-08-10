@@ -7,6 +7,8 @@ import {User} from "../model/user";
 import {UserService} from "../services/user.service";
 import {ActivatedRoute, Routes} from "@angular/router";
 import {AuthService} from "../services/auth.service";
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-ajouter-association',
@@ -17,21 +19,20 @@ export class AjouterAssociationComponent implements OnInit {
   newAssociationFormGroup!:FormGroup;
   private errorMessage!: string;
   public currentUser = new User();
-  public username="test";
 
   constructor(private auth:AuthService,private activatedRoute:ActivatedRoute,private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
 
   ngOnInit(): void {
-
+    // this.userService.consulterUtilisateurParPseudo(this.activatedRoute.snapshot.params['username']).subscribe(
+    //   user => {
+    //     this.currentUser = user
+    //   })
     this.chargerForm()
 
   }
 
   private chargerForm(){
-    this.userService.consulterUtilisateurParPseudo(this.activatedRoute.snapshot.params['username']).subscribe(
-      user => {
-        this.currentUser = user
-      })
+
     this.newAssociationFormGroup=this.fb.group(
       {
         nom:this.fb.control(null,[Validators.required,Validators.maxLength(40)]),
@@ -44,11 +45,10 @@ export class AjouterAssociationComponent implements OnInit {
     )
   }
 
-  saveAsso(username:string) {
-
+  saveAsso() {
     let asso:Association = this.newAssociationFormGroup.value
-
-    this.assoService.saveAsso(username,asso).subscribe({
+    this.userService.getUserById(this.currentUser.id)
+    this.assoService.saveAsso(asso).subscribe({
       next:data=>{
 
         console.log(data)

@@ -10,11 +10,11 @@ export class AuthService {
 
   apiURL: string = 'http://localhost:8080/asso';
   token!: string ;
-  public loggedUser!:string;
+  claimsUsername!:string;
   public isloggedIn: Boolean = false;
   public roles!:string[];
   private helper = new JwtHelperService();
-
+  public loggedUser!:string
   constructor(private router: Router,
   private http : HttpClient) { }
 
@@ -37,8 +37,10 @@ export class AuthService {
     const decodedToken = this.helper.decodeToken(this.token);
     this.roles = decodedToken.roles;
     console.log(this.roles)
-    this.loggedUser = decodedToken.username;
-    console.log(this.loggedUser)
+    // return console username :: Admin
+    this.claimsUsername = decodedToken.username;
+    localStorage.setItem("username",this.claimsUsername)
+    console.log(this.claimsUsername)
 
   }
 

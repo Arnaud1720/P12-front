@@ -3,7 +3,7 @@
     Ajouter association
   </div>
   <div class="card-body">
-    <form  [formGroup]="newAssociationFormGroup" method="post" (ngSubmit)="saveAsso(currentUser.username)">
+    <form  [formGroup]="newAssociationFormGroup" method="post" (ngSubmit)="saveAsso()">
       <div class="mb-3">
           <label class="form-label">Nom :</label>
           <input type="text" formControlName="nom" class="form-control">
