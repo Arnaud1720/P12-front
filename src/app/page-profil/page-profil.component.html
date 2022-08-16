@@ -25,14 +25,14 @@
             <li class="nav-item">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="authService.isGestionaire()">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Association</a>
             </li>
           </ul>
         </div>
       </div>
       <div class="col-md-2">
-        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Modif profil"/>
+        <input [routerLink]="['/users/user/update/',currentUser.id]" type="submit" class="profile-edit-btn" name="btnAddMore" value="Modif profil"/>
       </div>
     </div>
     <div class="row" >
@@ -42,8 +42,8 @@
           <a href="">facebook lien</a><br/>
           <a href="">Discord lien</a><br/>
           <a href="">Email de contact</a>
-          <p>Titre</p>
-          <a href="">?????</a><br/>
+          <p>{{titre}}</p>
+          <a href=""></a><br/>
 
         </div>
       </div>

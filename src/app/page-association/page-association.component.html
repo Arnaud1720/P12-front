@@ -21,7 +21,10 @@
             <td>{{asso.description}}</td>
             <td>{{asso.dateCreation|date:"yyyy-MM-dd HH:mm"}}</td>
             <td>{{asso.nbrAdherent}}</td>
-            <td><a  routerLink="/adherent" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
+            <td><a  [routerLink]="['/adherent/',asso.id]" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
+<!--            <td><a  routerLink="/adherent/" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>-->
+
+
             <td><button *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteAsso(asso)"><i class="fa-solid fa-trash-can"></i></button></td>
           </tr>
 

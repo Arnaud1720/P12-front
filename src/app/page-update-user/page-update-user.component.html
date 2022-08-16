@@ -3,58 +3,25 @@
     Mise a jour
   </div>
   <div class="card-body">
-    <form [formGroup]="newUserFormGroupUpdate" (ngSubmit)="updateUser()" >
-
+    <form>
       <div class="mb-3">
-        <label class="form-label">tel:</label>
-        <input type="text" formControlName="phoneNumber" class="form-control">
-        <span class="text-danger"
-              *ngIf="newUserFormGroupUpdate.controls['phoneNumber'].touched
-          &&newUserFormGroupUpdate.controls['phoneNumber'].errors
-          && newUserFormGroupUpdate.controls['phoneNumber'].errors!['required']">
-          N° requis pour valider le formulaire
-        </span>
+          <label>ID</label>
+          <input readonly type="text" [ngModel]="currentUser.id" name="id" class="form-control" >
       </div>
       <div class="mb-3">
-        <label class="form-label">adresse postale:</label>
-        <input type="text" formControlName="adressPostal" class="form-control">
-        <span class="text-danger"
-              *ngIf="newUserFormGroupUpdate.controls['adressPostal'].touched
-          &&newUserFormGroupUpdate.controls['adressPostal'].errors
-          && newUserFormGroupUpdate.controls['adressPostal'].errors!['required']">
-          adresse postale requise pour valider le formulaire
-        </span>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">mot de passe:</label>
-        <input type="password" formControlName="password" class="form-control">
-        <span class="text-danger"
-              *ngIf="newUserFormGroupUpdate.controls['password'].touched
-          &&newUserFormGroupUpdate.controls['password'].errors
-          && newUserFormGroupUpdate.controls['password'].errors!['required']">
-        le mot de passe ne peu pas  être inférieur a 4 caractère
-        </span>
+        <label>Mot de passe</label>
+        <input  type="text" [ngModel]="currentUser.password" name="password" class="form-control" >
       </div>
       <div class="mb-3">
         <label class="form-label">email:</label>
-        <input type="email" formControlName="email" class="form-control">
-        <span class="text-danger"
-              *ngIf="newUserFormGroupUpdate.controls['email'].touched
-          &&newUserFormGroupUpdate.controls['email'].errors
-          && newUserFormGroupUpdate.controls['email'].errors!['email']">
-          email non valide
-        </span>
-        <span class="text-danger"
-              *ngIf="newUserFormGroupUpdate.controls['email'].touched
-          &&newUserFormGroupUpdate.controls['email'].errors
-          && newUserFormGroupUpdate.controls['email'].errors!['minLength']">
-          l'email ne peu pas être inférieur a 5 caractère
-        </span>
+        <label>Email</label>
+        <input  type="text" [ngModel]="currentUser.email" name="email" class="form-control" >
       </div>
+
 
       <div  class="mb-2 d-flex justify-content-between">
 
-        <button [disabled]="!newUserFormGroupUpdate.valid"  class="btn btn-info" type="submit">Maj</button>
+        <button (click)="updateUser()"  class="btn btn-info" type="submit">Maj</button>
         <input class="btn btn-primary " type="reset" value="Reset">
 
       </div>

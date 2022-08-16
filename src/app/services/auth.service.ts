@@ -12,7 +12,7 @@ export class AuthService {
   token!: string ;
   claimsUsername!:string;
   public isloggedIn: Boolean = false;
-  public roles!:string[];
+  public roles!:string;
   private helper = new JwtHelperService();
   public loggedUser!:string
   constructor(private router: Router,
@@ -39,7 +39,9 @@ export class AuthService {
     console.log(this.roles)
     // return console username :: Admin
     this.claimsUsername = decodedToken.username;
+    this.roles=decodedToken.roles
     localStorage.setItem("username",this.claimsUsername)
+    localStorage.setItem("roles",this.roles)
     console.log(this.claimsUsername)
 
   }
@@ -62,6 +64,12 @@ export class AuthService {
 
   }
 
+  isGestionaire():Boolean{
+    if (!this.roles)
+      return false;
+    return this.roles.indexOf('GESTIONAIRE') >=0;
+
+  }
 
   logout() {
     this.loggedUser = undefined!;

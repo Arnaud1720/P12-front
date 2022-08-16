@@ -4,6 +4,7 @@ import {catchError, connect, map, Observable, throwError} from "rxjs";
 import {User} from "../model/user";
 import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
+import {Router} from "@angular/router";
 const httpOptions={
   headers: new HttpHeaders( {'Content-Type': 'application/json'})
 }
@@ -12,21 +13,13 @@ const httpOptions={
 })
 
 export class UserService {
-  id!:string
 
 
-  constructor(private http: HttpClient,private authService:AuthService) {
+  constructor(private  router:Router,private http: HttpClient,private authService:AuthService) {
 
 
   }
 
-  getUserById(id: number):Observable<User>{
-    let jwt = this.authService.getToken();
-    jwt = "Bearer "+jwt;
-    let httpHeader = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeader}).pipe(
-      map((user:User)=>user))
-  }
 
 
   addUser(user: User): Observable<User> {
@@ -63,21 +56,13 @@ export class UserService {
     return this.http.delete(environment.backendHost+"/user/"+id,{headers:httpHeader})
   }
 
-  consulterUtilisateur(id:number):Observable<User> {
+    consulterUtilisateur(id:number):Observable<User> {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
     return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeaders})
   }
 
-  consulterUtilisateurParPseudo(username:string):Observable<User> {
-    let jwt = this.authService.getToken();
-    // recupération claims username
-
-    jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<User>(environment.backendHost+"/user/",{headers:httpHeaders})
-  }
 
   /**
    * Etat : ok

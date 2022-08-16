@@ -17,16 +17,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AjouterAssociationComponent implements OnInit {
   newAssociationFormGroup!:FormGroup;
-  private errorMessage!: string;
-  public currentUser = new User();
 
   constructor(private auth:AuthService,private activatedRoute:ActivatedRoute,private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
 
   ngOnInit(): void {
-    // this.userService.consulterUtilisateurParPseudo(this.activatedRoute.snapshot.params['username']).subscribe(
-    //   user => {
-    //     this.currentUser = user
-    //   })
     this.chargerForm()
 
   }
@@ -47,7 +41,6 @@ export class AjouterAssociationComponent implements OnInit {
 
   saveAsso() {
     let asso:Association = this.newAssociationFormGroup.value
-    this.userService.getUserById(this.currentUser.id)
     this.assoService.saveAsso(asso).subscribe({
       next:data=>{
 

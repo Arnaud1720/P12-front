@@ -15,10 +15,10 @@ export class PageUpdateUserComponent implements OnInit {
   constructor(private userService:UserService,private activatedRoute:ActivatedRoute,private router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.userService.consulterUtilisateur(this.activatedRoute.snapshot.params['username']).subscribe(
+    this.userService.consulterUtilisateur(this.activatedRoute.snapshot.params['id']).subscribe(
       user =>{this.currentUser=user}
     )
-    this.chargeNewFormUpdate()
+
   }
 
   public chargeNewFormUpdate(){

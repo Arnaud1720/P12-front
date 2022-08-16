@@ -18,11 +18,11 @@ const routes: Routes = [
   {path:'users',
     children:[
       {path:'',component:PageUtilisateursComponent},
-      {path:':id', component:PageProfilComponent},
+      {path:'profil/:id', component:PageProfilComponent},
     ],
   },
   {path:'users/user/update/:id', component:PageUpdateUserComponent},
-  {path:"adherent",component:PageAdherentComponent},
+  {path:"adherent/:id",component:PageAdherentComponent},
   { path: "", redirectTo: "/", pathMatch: "full"}
 ];
 @NgModule({

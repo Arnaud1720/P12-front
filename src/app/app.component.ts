@@ -13,7 +13,7 @@ import {Observable} from "rxjs";
 })
 export class AppComponent {
   title = 'front-association';
-  user!:Observable<User>;
+  currentUser=new User()
 
 constructor(public authService:AuthService, private router:Router)
 {
@@ -21,7 +21,6 @@ constructor(public authService:AuthService, private router:Router)
 }
 
   ngOnInit ():void {
-
     this.authService.loadToken();
     if (this.authService.getToken()==null ||
       this.authService.isTokenExpired())
