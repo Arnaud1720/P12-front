@@ -9,25 +9,18 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class AdherentService {
-  private idAsso!:number; //Ok recupéré le paramètre de manière automatique
 
   constructor(private http:HttpClient,private authService:AuthService) {
 
   }
-  displayAllAdherent():Observable<Array<Adherents>>{
-    let jwt = this.authService.getToken();
-    jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<Array<Adherents>>(environment.backendHost+"/association/all")
-  }
 
-  addNewAdherent(adh:Adherents):Observable<Adherents>{
+
+  addNewAdherent(adh:Adherents,idAsso:string):Observable<Adherents>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
-    const params = new HttpParams().set('idAsso', this.idAsso);
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
     let username = localStorage.getItem("username")
-    return this.http.post<Adherents>(environment.backendHost + "/adherent/" + username + "/save?idAsso=" + params.get('idAsso'),adh)
+    return this.http.post<Adherents>(environment.backendHost + "/adherent/" + username + "/save?idAsso=" +idAsso,adh)
 
   }
 }

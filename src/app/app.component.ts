@@ -17,6 +17,7 @@ export class AppComponent {
 
 constructor(public authService:AuthService, private router:Router)
 {
+//Recupére l'id
 
 }
 

@@ -4,7 +4,6 @@ import {Association} from "../model/association";
 import {Observable} from "rxjs";
 import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
-import {User} from "../model/user";
 import {UserService} from "./user.service";
 const httpOptions={
   headers: new HttpHeaders( {'Content-Type': 'application/json'})
@@ -13,13 +12,14 @@ const httpOptions={
   providedIn: 'root'
 })
 export class AssociationService {
-
+ public asso = new Association()
   constructor(public userService:UserService,private http: HttpClient,private authService:AuthService) {
   }
 
   afficheAssociation(): Observable<Array<Association>> {
   let jwt = this.authService.getToken();
   jwt="Bearer "+jwt;
+  localStorage.setItem("idAsso",String(this.asso.id))
   let httpHeader= new HttpHeaders({"Authorization":jwt})
     return this.http.get<Array<Association>>(environment.backendHost+"/association/all",{headers:httpHeader});
 

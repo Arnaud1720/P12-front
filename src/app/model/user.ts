@@ -1,3 +1,7 @@
+import {Role} from "./role";
+import {Adherents} from "./adherents";
+import {Association} from "./association";
+
 export class User {
   id!: number
   lastName!: string;
@@ -7,6 +11,8 @@ export class User {
   password!: string;
   email!: string;
   username!: string;
-  roles!: string;
+  roles!: Role[];
   enabled!: boolean;
+  adh!:Array<Adherents>
+  asso!:Array<Association>
 }

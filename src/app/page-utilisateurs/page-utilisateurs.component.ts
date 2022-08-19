@@ -30,10 +30,6 @@ export class PageUtilisateursComponent implements OnInit {
 
   }
 
-
-
-
-
   chargerUtilisateur() {
     this.utilisateur=this.userService.displayAllUsers().pipe(
       catchError(err => {

@@ -19,9 +19,9 @@ const routes: Routes = [
     children:[
       {path:'',component:PageUtilisateursComponent},
       {path:'profil/:id', component:PageProfilComponent},
+      {path:'update/:id',component:PageUpdateUserComponent}
     ],
   },
-  {path:'users/user/update/:id', component:PageUpdateUserComponent},
   {path:"adherent/:id",component:PageAdherentComponent},
   { path: "", redirectTo: "/", pathMatch: "full"}
 ];

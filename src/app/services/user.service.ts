@@ -64,16 +64,15 @@ export class UserService {
   }
 
 
-  /**
-   * Etat : ok
-   * @param currentUser
-   */
-  updateUser(currentUser:User):Observable<User>
+
+
+  updateUserWithIdParam(userBody:User,idUser:String):Observable<User>
   {
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.put<User>(environment.backendHost+"/user/update",currentUser,{headers:httpHeaders})
+    console.log("USER_ID Service=="+idUser)
+    return this.http.put<User>(environment.backendHost+"/user/update/"+idUser,userBody,{headers:httpHeaders})
   }
 
   /**

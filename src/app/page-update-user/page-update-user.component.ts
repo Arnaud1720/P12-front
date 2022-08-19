@@ -3,6 +3,7 @@ import {UserService} from "../services/user.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {User} from "../model/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-page-update-user',
@@ -10,14 +11,18 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./page-update-user.component.css']
 })
 export class PageUpdateUserComponent implements OnInit {
-  currentUser = new User();
   newUserFormGroupUpdate!:FormGroup;
+  username!:String
+  userId!:String
   constructor(private userService:UserService,private activatedRoute:ActivatedRoute,private router:Router, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.userService.consulterUtilisateur(this.activatedRoute.snapshot.params['id']).subscribe(
-      user =>{this.currentUser=user}
-    )
+
+    this.activatedRoute.params.subscribe(data=>{
+      this.userId = data["id"]
+      console.log("id User côté component === "+this.userId)
+    })
+    this.chargeNewFormUpdate()
 
   }
 
@@ -30,10 +35,15 @@ export class PageUpdateUserComponent implements OnInit {
     })
   }
 
-  updateUser(){
-    this.userService.updateUser(this.currentUser).subscribe(user=>{
-      this.router.navigate(['users'])
-    })
-  }
 
+
+    updateUserWithId(){
+      let userBody=this.newUserFormGroupUpdate?.value
+      this.userService.updateUserWithIdParam(userBody,this.userId).subscribe(userDate=>{
+        console.log("Body === "+userBody)
+        console.log("USER_ID === "+this.userId)
+
+        this.router.navigate(['/users'])
+      })
+    }
 }

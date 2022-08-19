@@ -15,14 +15,26 @@ export class PageAdherentComponent implements OnInit {
   adherentFormGroup!:FormGroup
   adherent!:Observable<Array<Adherents>>
   errorMessage!:string;
-  idAsso!:number;
+  assoId!:string;
+  idUser!:String;
+  idAdh!:String
   constructor(private authService:AuthService
               ,private router:Router,
               private  adherentService:AdherentService,
-              private fb:FormBuilder,private route:ActivatedRoute) { }
+              private fb:FormBuilder,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
       this.chargementForm()
+      this.activatedRoute.params.subscribe(s=>{
+        this.assoId = s["id"]
+        this.idAdh=s["id"]
+        this.idUser=s["id"]
+            console.log("Id Asso Asso"+this.assoId)
+            console.log("Id user "+this.idUser)
+            console.log("Id  ADH"+this.idAdh)
+
+      })
   }
   public chargementForm(){
     this.adherentFormGroup=this.fb.group({
@@ -31,10 +43,10 @@ export class PageAdherentComponent implements OnInit {
   }
 
 
+
   saveAdherent() {
       let adherent:Adherents=this.adherentFormGroup?.value
-
-      this.adherentService.addNewAdherent(adherent).subscribe({
+      this.adherentService.addNewAdherent(adherent,this.assoId).subscribe({
         next:data=>{
           alert("adherent enregister avec sucès")
           this.adherentFormGroup?.reset()
@@ -43,5 +55,7 @@ export class PageAdherentComponent implements OnInit {
           console.log(err)
         }
       })
+
+
   }
 }
