@@ -4,8 +4,6 @@ import {Association} from "../model/association";
 import {Router} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {catchError, Observable, throwError} from "rxjs";
-import {UserService} from "../services/user.service";
-import {User} from "../model/user";
 
 @Component({
   selector: 'app-page-association',

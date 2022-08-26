@@ -1,0 +1,42 @@
+<div class="container ">
+  <ng-container *ngIf="activites | async as listAct;else failureOrLoading">
+    <div class="card-header shadow mb-4 mt-lg-5 text-center">
+      LISTE DE TOUTE LES ACTIVITE
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>debut</th>
+            <th>fin</th>
+            <th>description</th>
+            <th>nom Utilisateur</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let act of activites |async">
+          <tr>
+            <td>{{act.id}}</td>
+            <td>{{act.dateDebut}}</td>
+            <td>{{act.dateFin }}</td>
+            <td>{{act.description}}</td>
+            <td>{{act.userAtc.username}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #failureOrLoading  >
+    <ng-container *ngIf="errorMessage;else loading">
+      <div class="text-danger">
+        {{errorMessage}}
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center mt-lg-5">
+        <h4>chargement</h4>
+        <progress></progress>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

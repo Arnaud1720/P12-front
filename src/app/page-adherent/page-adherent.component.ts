@@ -16,8 +16,8 @@ export class PageAdherentComponent implements OnInit {
   adherent!:Observable<Array<Adherents>>
   errorMessage!:string;
   assoId!:string;
-  idUser!:String;
-  idAdh!:String
+  idUser!:string;
+  idAdh!:string
   constructor(private authService:AuthService
               ,private router:Router,
               private  adherentService:AdherentService,

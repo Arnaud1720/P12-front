@@ -8,6 +8,8 @@ import {PageProfilComponent} from "./page-profil/page-profil.component";
 import {PageUtilisateursComponent} from "./page-utilisateurs/page-utilisateurs.component";
 import {PageAdherentComponent} from "./page-adherent/page-adherent.component";
 import {PageUpdateUserComponent} from "./page-update-user/page-update-user.component";
+import {AssociationDetailsComponent} from "./association-details/association-details.component";
+import {PageActiviteComponent} from "./page-activite/page-activite.component";
 
 const routes: Routes = [
   {path:"creation/utilisateur",component:PageInscriptionComponent},
@@ -22,6 +24,8 @@ const routes: Routes = [
       {path:'update/:id',component:PageUpdateUserComponent}
     ],
   },
+  {path:"list/association/details/:id",component:AssociationDetailsComponent},
+  {path:"act/all",component:PageActiviteComponent},
   {path:"adherent/:id",component:PageAdherentComponent},
   { path: "", redirectTo: "/", pathMatch: "full"}
 ];

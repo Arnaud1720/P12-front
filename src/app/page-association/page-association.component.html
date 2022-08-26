@@ -12,20 +12,19 @@
             <th>date de création</th>
             <th>nombre d'adherents</th>
             <th>devenir membre</th>
-          </tr>
+            </tr>
           </thead>
           <tbody *ngFor="let asso of association |async">
           <tr>
             <td>{{asso.id}}</td>
             <td>{{asso.idUser}}</td>
-            <td>{{asso.description}}</td>
-            <td>{{asso.dateCreation|date:"yyyy-MM-dd HH:mm"}}</td>
+            <td>{{asso.description }}</td>
+            <td>{{asso.dateCreation|date:"dd/MM/yyyy"}}</td>
             <td>{{asso.nbrAdherent}}</td>
             <td><a  [routerLink]="['/adherent/',asso.id]" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>
-<!--            <td><a  routerLink="/adherent/" class="btn-link"  ><i class="fa-solid fa-check"></i></a></td>-->
-
-
             <td><button *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteAsso(asso)"><i class="fa-solid fa-trash-can"></i></button></td>
+            <td><button  class="btn btn-info" [routerLink]="['details/',asso.id]" ><i class="fa-solid fa-circle-info"></i></button></td>
+
           </tr>
 
           </tbody>
@@ -39,7 +38,6 @@
       <div class="text-danger">
         {{errorMessage}}
       </div>
-
     </ng-container>
     <ng-template #loading>
       <div class="text-center mt-lg-5">

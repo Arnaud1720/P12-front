@@ -71,6 +71,16 @@ export class AuthService {
 
   }
 
+  isAdherent():Boolean{
+    if (!this.roles)
+      return false;
+    return this.roles.indexOf('ADHERENT') >=0;
+
+  }
+  authToken(){
+
+  }
+
   logout() {
     this.loggedUser = undefined!;
     this.roles = undefined!;

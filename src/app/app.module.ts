@@ -15,6 +15,8 @@ import { IconesComponent } from './allicones/icones/icones.component';
 import { PageAdherentComponent } from './page-adherent/page-adherent.component';
 import {User} from "./model/user";
 import { PageUpdateUserComponent } from './page-update-user/page-update-user.component';
+import { AssociationDetailsComponent } from './association-details/association-details.component';
+import { PageActiviteComponent } from './page-activite/page-activite.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { PageUpdateUserComponent } from './page-update-user/page-update-user.com
     IconesComponent,
     PageAdherentComponent,
     PageUpdateUserComponent,
+    AssociationDetailsComponent,
+    PageActiviteComponent,
   ],
   imports: [
 

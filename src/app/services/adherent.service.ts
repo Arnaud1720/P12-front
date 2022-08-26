@@ -4,7 +4,9 @@ import {AuthService} from "./auth.service";
 import {Observable} from "rxjs";
 import {Adherents} from "../model/adherents";
 import {environment} from "../../environments/environment";
-
+const httpOptions={
+  headers: new HttpHeaders( {'Content-Type': 'application/json'})
+}
 @Injectable({
   providedIn: 'root'
 })
