@@ -6,6 +6,8 @@
     </div>
     <div class="mt-1 mb-3 ml-3" *ngIf="authService.isGestionaire()">
       <a class="btn btn-success text-black-50" (click)="onToggleForm()" >ajouter une activiter</a>    </div>
+    <div class="mt-1 mb-3 ml-3">
+      <a class="btn btn-success text-black-50" (click)="showAdherent()" >affichier les adherent</a>    </div>
   </div>
   <div class="container w-50 mt-4" *ngIf="showForm==true">
     <div class="card-header">
@@ -25,7 +27,7 @@
         </span>
         </div>
         <div class="mb-3">
-          <label class="form-label">date de début:</label>
+          <label class="form-label">date de début:</label> <strong class="text-danger"*ngIf="errorMessage">{{messageError}}</strong>
           <input type="date" formControlName="dateDebut" class="form-control">
           <span class="text-danger"
                 *ngIf="newUserFormGroupActivite.controls['dateDebut'].touched
@@ -58,6 +60,11 @@
 
 
   <div class="container ">
+    <div class="col-md-4 text-center mt-2">
+      <div class="alert- alert-danger">
+        <span class="" *ngIf="errorMessage">{{messageError}}</span>
+      </div>
+    </div>
     <ng-container *ngIf="activites | async as listAct;else failureOrLoading">
       <div class="card-header shadow mb-4 mt-lg-5 text-center">
         LISTE DE TOUTE LES ACTIVITE
@@ -76,10 +83,12 @@
             <tbody *ngFor="let act of activites |async">
             <tr>
               <td>{{act.id}}</td>
-              <td>{{act.dateDebut}}</td>
-              <td>{{act.dateFin }}</td>
+              <td>{{act.dateDebut |date:"dd/MM/yyyy"}}</td>
+              <td>{{act.dateFin |date:"dd/MM/yyyy"}}</td>
               <td>{{act.description}}</td>
-              <td><button *ngIf="authService.isAdherent"></button></td>
+              <td><button class="btn btn-outline-info" (click)="saveActivityAdh()">inscription</button></td>
+              <td><button *ngIf="authService.isGestionaire()" class="btn btn-danger" (click)="deleteAct(act)"><i class="fa-solid fa-trash-can"></i></button></td>
+
             </tr>
             </tbody>
           </table>
@@ -101,4 +110,46 @@
     </ng-template>
   </div>
 
+  <div class="container  "  *ngIf="showAdh==true">
+    <ng-container *ngIf="adherent  | async as listAdh;else failureOrLoading">
+      <div  class="card-header shadow mb-4 mt-lg-5 text-center">
+        LISTE DE TOUTE DES Adherent
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th>debut</th>
+              <th>fin</th>
+              <th>description</th>
+
+
+            </tr>
+            </thead>
+            <tbody *ngFor="let adh of adherent |async">
+            <tr>
+              <td>{{adh.id}}</td>
+              <td>{{adh.licenseStart}}</td>
+              <td>{{adh.licenseStop}}</td>
+              <td>{{adh.nom}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #failureOrLoading  >
+      <ng-container *ngIf="errorMessage;else loading">
+        <div class="text-danger">
+          {{errorMessage}}
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        <div class="text-center mt-lg-5">
+          <h4>chargement</h4>
+          <progress></progress>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
 </div>

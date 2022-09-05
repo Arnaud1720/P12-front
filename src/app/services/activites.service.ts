@@ -43,5 +43,19 @@ export class ActivitesService {
     let username = localStorage.getItem("username")
     return this.http.post<Activites>(environment.backendHost+"/act/save/"+username+"/"+idAsso,act,{headers:httpHeader})
   }
+
+  saveActiviteAdh(idAdh:string,idAct:string):Observable<Activites>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post<Activites>(environment.backendHost+"/act/save/adh/activite?idAdh="+idAdh+"&idAct="+idAct,"",{headers:httpHeaders})
+  }
+
+
+  supprimerActivite(idAct :number) {
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeader = new HttpHeaders({"Authorization":jwt})
+    return this.http.delete(environment.backendHost+"/act/delete/"+idAct, {headers:httpHeader})
+  }
 }
-//POST http://localhost:8080/asso/save/Paula.Kub/1 404

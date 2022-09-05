@@ -1,5 +1,6 @@
 import {User} from "./user";
 import {Association} from "./association";
+import {Adherents} from "./adherents";
 
 export class Activites{
   id!:number
@@ -7,7 +8,9 @@ export class Activites{
   dateDebut!:Date
   dateFin!:Date
   userAtc!:User
-  Association!:Association
+  association!:Association
+  participant!:number;
+  adherents!:Adherents[]
 }
 
 

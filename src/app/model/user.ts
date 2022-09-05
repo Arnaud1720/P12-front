@@ -11,7 +11,7 @@ import {Association} from "./association";
     password!: string;
     email!: string;
     username!: string;
-    roles!: Array<Role>;
+    roles!: [];
     act!:Array<Activites>
     enabled!: boolean;
     asso!:Array<Association>

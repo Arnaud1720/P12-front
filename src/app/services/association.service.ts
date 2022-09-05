@@ -12,14 +12,12 @@ const httpOptions={
   providedIn: 'root'
 })
 export class AssociationService {
- // public asso = new Association()
   constructor(public userService:UserService,private http: HttpClient,private authService:AuthService) {
   }
 
   afficheAssociation(): Observable<Array<Association>> {
   let jwt = this.authService.getToken();
   jwt="Bearer "+jwt;
-  // localStorage.setItem("idAsso",String(this.asso.id))
   let httpHeader= new HttpHeaders({"Authorization":jwt})
     return this.http.get<Array<Association>>(environment.backendHost+"/association/all",{headers:httpHeader});
 

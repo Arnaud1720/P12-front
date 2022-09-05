@@ -10,7 +10,6 @@
             <th>debut</th>
             <th>fin</th>
             <th>description</th>
-            <th>nom Utilisateur</th>
           </tr>
           </thead>
           <tbody *ngFor="let act of activites |async">
@@ -19,7 +18,6 @@
             <td>{{act.dateDebut}}</td>
             <td>{{act.dateFin }}</td>
             <td>{{act.description}}</td>
-            <td>{{act.userAtc.username}}</td>
           </tr>
           </tbody>
         </table>

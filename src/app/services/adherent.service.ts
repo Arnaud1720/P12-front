@@ -4,6 +4,7 @@ import {AuthService} from "./auth.service";
 import {Observable} from "rxjs";
 import {Adherents} from "../model/adherents";
 import {environment} from "../../environments/environment";
+import {Activites} from "../model/Activites";
 const httpOptions={
   headers: new HttpHeaders( {'Content-Type': 'application/json'})
 }
@@ -25,4 +26,13 @@ export class AdherentService {
     return this.http.post<Adherents>(environment.backendHost + "/adherent/" + username + "/save?idAsso=" +idAsso,adh)
 
   }
+
+  findAdhByIdAsso(idAsso:string):Observable<Array<Adherents>>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.get<Array<Adherents>>(environment.backendHost+"/adherent/"+idAsso)
+  }
+
+
 }

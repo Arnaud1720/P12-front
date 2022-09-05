@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../services/user.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
-import {User} from "../model/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-page-update-user',

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {catchError, Observable, throwError} from "rxjs";
 import {Activites} from "../model/Activites";
 import {ActivitesService} from "../services/activites.service";
 import {AuthService} from "../services/auth.service";
+import {AdherentService} from "../services/adherent.service";
+import {Adherents} from "../model/adherents";
+import {Association} from "../model/association";
 
 @Component({
   selector: 'app-association-details',
@@ -13,29 +16,31 @@ import {AuthService} from "../services/auth.service";
 })
 export class AssociationDetailsComponent implements OnInit {
   assoId!:string;
+   idAdh!: string;
+   idAct!: string;
+
+
   newUserFormGroupActivite!:FormGroup;
   public  showForm: boolean = false;
-  activites!:Observable<Array<Activites>>;
-  errorMessage!:string;
+  public  showAdh: boolean = false;
 
-  constructor(public authService:AuthService,private activiteService:ActivitesService,private activatedRoute: ActivatedRoute,private fb:FormBuilder) { }
+  activites!:Observable<Array<Activites>>;
+  adherent!:Observable<Array<Adherents>>;
+  errorMessage!:string;
+  actAdh!: Observable<Activites>
+  messageError="Impossible de supprimer cette activité! cause: participant inscrit"
+
+  constructor(private adhService:AdherentService,
+              public authService:AuthService,
+              private activiteService:ActivitesService,
+              private activatedRoute: ActivatedRoute,private fb:FormBuilder,  private router:Router) { }
 
   ngOnInit(): void {
+
     this.onAddForm()
     this.findAssoById()
-
-    this.activites=this.activiteService.afficheActByIdAsso(this.assoId).pipe(
-      catchError(err => {
-        this.errorMessage=err.message
-        return throwError(err)
-      })
-    )
-    this.activiteService.affichetout().pipe(
-      catchError(err => {
-        this.errorMessage=err.message
-        return throwError(err)
-      })
-    )
+    this.findAdhByIdAsso()
+    this.displayAllActByIdAsso()
 
   }
   public onToggleForm(): void {
@@ -43,26 +48,72 @@ export class AssociationDetailsComponent implements OnInit {
     console.log(this.showForm)
   }
 
- findAssoById(){
+  public showAdherent(): void {
+    this.showAdh = !this.showAdh;
+    console.log(this.showForm)
+  }
+
+  findAssoById(){
    this.activatedRoute.params.subscribe(data=>{
      this.assoId = data["id"]
      console.log("Id Asso Asso details"+this.assoId)
    })
  }
 
+
+ displayAllActByIdAsso(){
+   this.activites=this.activiteService.afficheActByIdAsso(this.assoId).pipe(
+     catchError(err => {
+       this.errorMessage=err.message
+       return throwError(err)
+     })
+   )
+ }
+
+  findByIdAdh(){
+    this.activatedRoute.params.subscribe(data=>{
+      this.idAdh = data['id']
+      console.log("Id Adh ==== "+this.idAdh)
+    })
+  }
+
+  findByIdAct(){
+    this.activatedRoute.params.subscribe(data=>{
+      this.idAct=data['id']
+      console.log("idAct ===="+ this.idAct)
+    })
+  }
+
   saveActivity() {
     let act:Activites= this.newUserFormGroupActivite.value
+
     this.activiteService.savegardeAct(act,this.assoId).subscribe({
       next:data=>{
         console.log(data)
         alert("une activité a été crée")
         this.newUserFormGroupActivite.reset()
+        this.router.navigate(['/list/association']);
 
       },
       error:err => {
         console.log(err)
       }
     })
+  }
+
+  saveActivityAdh() {
+    this.findByIdAct()
+    this.findByIdAdh()
+    this.activiteService.saveActiviteAdh(this.idAdh,this.idAct).subscribe(
+
+      {
+        next:data=>{
+
+          console.log(data)
+
+        }
+      }
+    )
   }
 
   onAddForm() {
@@ -73,4 +124,31 @@ export class AssociationDetailsComponent implements OnInit {
 
     })
   }
+  findAdhByIdAsso() {
+    this.adherent=this.adhService.findAdhByIdAsso(this.assoId).pipe(
+      catchError(err => {
+        this.errorMessage=err.message
+        return throwError(err)
+      })
+    )
+  }
+
+  deleteAct(act:Activites) {
+    let conf=confirm("etes-vous sur .?")
+    if(!conf)return;
+    if(act.participant>0){
+      this.errorMessage=this.messageError;
+    }
+    this.activiteService.supprimerActivite(act.id).subscribe({
+      next: resp => {
+        this.displayAllActByIdAsso();
+      },
+      error:err => {
+        console.log(err)
+      }
+    })
+  }
+
 }
+
+
