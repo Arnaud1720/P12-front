@@ -1,135 +1,135 @@
 <!---->
 <html>
 
-<div class="container emp-profile" *ngIf="currentUser">
-  <form method="post">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-img">
-          <img src="https://cdn-icons-png.flaticon.com/512/1094/1094625.png" alt=""/>
-          <div class="file btn btn-lg btn-primary">
-            changer photo de profil
-            <input type="file" name="file"/>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="profile-head">
-          <h5>
-            {{currentUser.username}}
-          </h5>
-          <h6>
-           texte
-          </h6>
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isGestionaire()">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Association</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <input [routerLink]="['/users/user/update/',currentUser.id]" type="submit" class="profile-edit-btn" name="btnAddMore" value="Modif profil"/>
-      </div>
-    </div>
-    <div class="row" >
-      <div class="col-md-4">
-        <div class="profile-work">
-          <p>WORK LINK</p>
-          <a href="">facebook lien</a><br/>
-          <a href="">Discord lien</a><br/>
-          <a href="">Email de contact</a>
-          <p>{{titre}}</p>
-          <a href=""></a><br/>
+<!--<div class="container emp-profile" *ngIf="currentUser">-->
+<!--  <form method="post">-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-4">-->
+<!--        <div class="profile-img">-->
+<!--          <img src="https://cdn-icons-png.flaticon.com/512/1094/1094625.png" alt=""/>-->
+<!--          <div class="file btn btn-lg btn-primary">-->
+<!--            changer photo de profil-->
+<!--            <input type="file" name="file"/>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <div class="profile-head">-->
+<!--          <h5>-->
+<!--            {{currentUser.username}}-->
+<!--          </h5>-->
+<!--          <h6>-->
+<!--           texte-->
+<!--          </h6>-->
+<!--          <ul class="nav nav-tabs" id="myTab" role="tablist">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" *ngIf="authService.isGestionaire()">-->
+<!--              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Association</a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-2">-->
+<!--        <input [routerLink]="['/users/user/update/',currentUser.id]" type="submit" class="profile-edit-btn" name="btnAddMore" value="Modif profil"/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row" >-->
+<!--      <div class="col-md-4">-->
+<!--        <div class="profile-work">-->
+<!--          <p>WORK LINK</p>-->
+<!--          <a href="">facebook lien</a><br/>-->
+<!--          <a href="">Discord lien</a><br/>-->
+<!--          <a href="">Email de contact</a>-->
+<!--          <p>{{titre}}</p>-->
+<!--          <a href=""></a><br/>-->
 
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="col-md-8">
-        <div class="tab-content profile-tab" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Nom:</label>
-              </div>
-              <div class="col-md-6">
-                  {{currentUser.fristName}}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Prenom:</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{currentUser.lastName}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Email:</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{currentUser.email}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>tel:</label>
-              </div>
-              <div class="col-md-6">
-                <p>{{currentUser.phoneNumber}}</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>roles:</label>
-              </div>
-              <div class="col-md-6" *ngFor="currentUser.roles">
-                  <p></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Role</label>
-              </div>
-              <div class="col-md-6">
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row">
-              <div class="col-md-6">
-                <label>Nom</label>
-              </div>
-              <div class="col-md-6">
-                <p>Nom Asso</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Description</label>
-              </div>
-              <div class="col-md-6">
-                <p>description Association</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label>Nombre d'haderent</label>
-              </div>
-              <div class="col-md-6">
-                <p>10</p>
-              </div>
-            </div>
+<!--&lt;!&ndash;      <div class="col-md-8">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="tab-content profile-tab" id="myTabContent">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Nom:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                  {{currentUser.fristName}}&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Prenom:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>{{currentUser.lastName}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Email:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>{{currentUser.email}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>tel:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>{{currentUser.phoneNumber}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>roles:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6" *ngFor="currentUser.roles">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <p></p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Role</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Nom</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>Nom Asso</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Description</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>description Association</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Nombre d'haderent</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>10</p>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
 </html>
 

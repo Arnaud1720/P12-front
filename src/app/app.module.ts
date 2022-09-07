@@ -17,6 +17,9 @@ import {User} from "./model/user";
 import { PageUpdateUserComponent } from './page-update-user/page-update-user.component';
 import { AssociationDetailsComponent } from './association-details/association-details.component';
 import { PageActiviteComponent } from './page-activite/page-activite.component';
+import { InfoMainComponent } from './info-main/info-main.component';
+import { PageSwitchRoleComponent } from './page-switch-role/page-switch-role.component';
+import { PageActiviteDetailComponent } from './page-activite-detail/page-activite-detail.component';
 
 
 @NgModule({
@@ -33,6 +36,9 @@ import { PageActiviteComponent } from './page-activite/page-activite.component';
     PageUpdateUserComponent,
     AssociationDetailsComponent,
     PageActiviteComponent,
+    InfoMainComponent,
+    PageSwitchRoleComponent,
+    PageActiviteDetailComponent,
   ],
   imports: [
 

@@ -12,12 +12,10 @@ import {Observable} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'front-association';
-  currentUser=new User()
+  title = 'google-maps';
 
 constructor(public authService:AuthService, private router:Router)
 {
-//Recupére l'id
 
 }
 

@@ -65,7 +65,8 @@
         <span class="" *ngIf="errorMessage">{{messageError}}</span>
       </div>
     </div>
-    <ng-container *ngIf="activites | async as listAct;else failureOrLoading">
+    <ng-container *ngIf="activites  | async as listAct;else failureOrLoading" >
+
       <div class="card-header shadow mb-4 mt-lg-5 text-center">
         LISTE DE TOUTE LES ACTIVITE
         <div class="card-body">
@@ -76,6 +77,7 @@
               <th>debut</th>
               <th>fin</th>
               <th>description</th>
+              <th>adherent</th>
 
 
             </tr>
@@ -86,7 +88,13 @@
               <td>{{act.dateDebut |date:"dd/MM/yyyy"}}</td>
               <td>{{act.dateFin |date:"dd/MM/yyyy"}}</td>
               <td>{{act.description}}</td>
-              <td><button class="btn btn-outline-info" (click)="saveActivityAdh()">inscription</button></td>
+              <td *ngFor="let adh of adherent |async">{{adh.id}}
+                <a class="btn btn-success w-100 "[routerLink]="['/act/save/',adh.id,act.id]"   ><i class="fa-solid fa-chevron-up"></i>gestionaire</a>
+              </td>
+
+
+<!--              act/save/:idAdh/:idAct-->
+
               <td><button *ngIf="authService.isGestionaire()" class="btn btn-danger" (click)="deleteAct(act)"><i class="fa-solid fa-trash-can"></i></button></td>
 
             </tr>

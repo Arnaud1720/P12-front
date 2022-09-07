@@ -16,8 +16,8 @@ export class PageUpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(data=>{
-      this.userId = data["id"]
+    this.activatedRoute.params.subscribe(param=>{
+      this.userId = param["id"]
       console.log("id User côté component === "+this.userId)
     })
     this.chargeNewFormUpdate()

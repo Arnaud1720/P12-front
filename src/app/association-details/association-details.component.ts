@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, map, Observable, switchMap, throwError} from "rxjs";
 import {Activites} from "../model/Activites";
 import {ActivitesService} from "../services/activites.service";
 import {AuthService} from "../services/auth.service";
@@ -32,7 +32,7 @@ export class AssociationDetailsComponent implements OnInit {
 
   constructor(private adhService:AdherentService,
               public authService:AuthService,
-              private activiteService:ActivitesService,
+              public activiteService:ActivitesService,
               private activatedRoute: ActivatedRoute,private fb:FormBuilder,  private router:Router) { }
 
   ngOnInit(): void {
@@ -70,19 +70,6 @@ export class AssociationDetailsComponent implements OnInit {
    )
  }
 
-  findByIdAdh(){
-    this.activatedRoute.params.subscribe(data=>{
-      this.idAdh = data['id']
-      console.log("Id Adh ==== "+this.idAdh)
-    })
-  }
-
-  findByIdAct(){
-    this.activatedRoute.params.subscribe(data=>{
-      this.idAct=data['id']
-      console.log("idAct ===="+ this.idAct)
-    })
-  }
 
   saveActivity() {
     let act:Activites= this.newUserFormGroupActivite.value
@@ -102,17 +89,14 @@ export class AssociationDetailsComponent implements OnInit {
   }
 
   saveActivityAdh() {
-    this.findByIdAct()
-    this.findByIdAdh()
-    this.activiteService.saveActiviteAdh(this.idAdh,this.idAct).subscribe(
-
-      {
-        next:data=>{
-
-          console.log(data)
-
+    this.activatedRoute.params.pipe(
+      map(data=>{
+        return{
+          idAdh:data['idAdh'],
+          idAct:data['idAct'],
         }
-      }
+      }),
+      switchMap(value => this.activiteService.saveActiviteAdh(value.idAdh,value.idAct))
     )
   }
 

@@ -1,9 +1,20 @@
+<app-info-main></app-info-main>
 <div class="container w-50 mt-4">
   <div class="card-header">
     Ajouter association
   </div>
-  <div class="card-body">
+  <div class="card-body" *ngIf="auth.isGestionaire()">
     <form  [formGroup]="newAssociationFormGroup" method="post" (ngSubmit)="saveAsso()">
+      <div class="mb-3">
+        <label class="form-label">Numero RNA :</label>
+        <input type="text" formControlName="numRNA" class="form-control">
+        <span class="text-danger"
+              *ngIf="newAssociationFormGroup.controls['numRNA'].touched
+          &&newAssociationFormGroup.controls['numRNA'].errors
+          && newAssociationFormGroup.controls['numRNA'].errors!['required']">
+          Le numero RNA doit commancer par W contenir 9 chiffre
+        </span>
+      </div>
       <div class="mb-3">
           <label class="form-label">Nom :</label>
           <input type="text" formControlName="nom" class="form-control">

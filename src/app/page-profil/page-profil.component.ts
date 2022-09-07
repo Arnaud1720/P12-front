@@ -13,16 +13,13 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['./page-profil.component.css']
 })
 export class PageProfilComponent implements OnInit {
-  currentUser=new User()
   titre="page profil"
   constructor(public authService:AuthService,public userService: UserService, private activatedRoute: ActivatedRoute) {
   }
 
 
   ngOnInit(): void {
-    this.userService.consulterUtilisateur(this.activatedRoute.snapshot.params['id']).subscribe(
-      user =>{this.currentUser=user}
-    )
+
   }
 
 }

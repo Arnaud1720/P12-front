@@ -44,11 +44,15 @@ export class ActivitesService {
     return this.http.post<Activites>(environment.backendHost+"/act/save/"+username+"/"+idAsso,act,{headers:httpHeader})
   }
 
-  saveActiviteAdh(idAdh:string,idAct:string):Observable<Activites>{
+  saveActiviteAdh(idAdh:String,idAct:String):Observable<Activites>{
+
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.post<Activites>(environment.backendHost+"/act/save/adh/activite?idAdh="+idAdh+"&idAct="+idAct,"",{headers:httpHeaders})
+    console.log("côté service  idAdh: "+idAdh )
+    console.log("côté service  idAct: "+idAct )
+
+    return this.http.post<Activites>(environment.backendHost+"/act/save/"+idAdh+"/"+idAct,"",{headers:httpHeaders})
   }
 
 

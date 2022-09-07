@@ -63,8 +63,12 @@ export class UserService {
     return this.http.get<User>(environment.backendHost+"/user/"+id,{headers:httpHeaders})
   }
 
-
-
+  ajouterRoleGestionaire(username: String):Observable<User>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    return this.http.post<User>(environment.backendHost+"/user/roles/gestionaire/"+username,"",{headers:httpHeaders})
+  }
 
   updateUserWithIdParam(userBody:User,idUser:String):Observable<User>
   {
@@ -91,5 +95,7 @@ export class UserService {
     return throwError('\n' +
       'une erreur c est produite, Veuillez réessayer plus tard.');
   }
+
+
 
 }

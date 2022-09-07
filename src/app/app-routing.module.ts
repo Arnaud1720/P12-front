@@ -10,6 +10,8 @@ import {PageAdherentComponent} from "./page-adherent/page-adherent.component";
 import {PageUpdateUserComponent} from "./page-update-user/page-update-user.component";
 import {AssociationDetailsComponent} from "./association-details/association-details.component";
 import {PageActiviteComponent} from "./page-activite/page-activite.component";
+import {PageSwitchRoleComponent} from "./page-switch-role/page-switch-role.component";
+import {PageActiviteDetailComponent} from "./page-activite-detail/page-activite-detail.component";
 
 const routes: Routes = [
   {path:"creation/utilisateur",component:PageInscriptionComponent},
@@ -20,13 +22,18 @@ const routes: Routes = [
   {path:'users',
     children:[
       {path:'',component:PageUtilisateursComponent},
-      {path:'profil/:id', component:PageProfilComponent},
-      {path:'update/:id',component:PageUpdateUserComponent}
+      {path:'update/:id',component:PageUpdateUserComponent},
     ],
   },
-  {path:"list/association/details/:id",component:AssociationDetailsComponent},
+  {
+    path: "list/association", children: [
+      {path: "details/:id", component: AssociationDetailsComponent},
+    ],
+  },
   {path:"act/all",component:PageActiviteComponent},
   {path:"adherent/:id",component:PageAdherentComponent},
+  {path:'user/roles/gestionaire/:username',component: PageSwitchRoleComponent},
+  {path:'act/save/:idAdh/:idAct',component:PageActiviteDetailComponent},
   { path: "", redirectTo: "/", pathMatch: "full"}
 ];
 @NgModule({

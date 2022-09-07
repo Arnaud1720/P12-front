@@ -1,0 +1,22 @@
+<div class="container mt-5" *ngIf="!authService.isGestionaire()">
+  <div class="card-header text-info">
+    <h4 class="text-danger">Avertisement</h4>
+
+  </div>
+  <div class="card-body" >
+    pour crée une association envoi contacter par <strong>derisbourgarnaud@gmail.com</strong>
+    dans ce mail veuillez reseigner votre
+    <ul class="list-group">
+      <li class="list-group-item">Numero RNA</li>
+      <li class="list-group-item">Nom du président de l'association</li>
+      <li class="list-group-item">date de création</li>
+      <li class="list-group-item">Numèro de téléphone</li>
+      <li class="list-group-item">email</li>
+      <li class="list-group-item">description</li>
+      <li class="list-group-item">pseudo </li>
+
+      L'administrateur ce reserve le droit d'accèpter ou non vôtre demande de création d'association  si vôtre demande est accpeter vous en serez averti par mail
+    </ul>
+  </div>
+
+</div>

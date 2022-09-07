@@ -4,7 +4,7 @@ import {Association} from "../model/association";
 import {User} from "../model/user";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {catchError, Observable, throwError} from "rxjs";
-import {Route, Router} from "@angular/router";
+import {ActivatedRoute, Route, Router} from "@angular/router";
 
 
 @Component({
@@ -14,52 +14,70 @@ import {Route, Router} from "@angular/router";
 })
 export class PageUtilisateursComponent implements OnInit {
 
-  searchFormGroup:FormGroup|undefined
-  utilisateur!:Observable<Array<User>>;
+  searchFormGroup: FormGroup | undefined
+  utilisateur!: Observable<Array<User>>;
+  errorMessage!: string;
+  username!:String;
 
-  errorMessage!:string;
-  constructor( private  userService:UserService, private fb:FormBuilder,private router:Router) { }
+  constructor(public activatedRoute:ActivatedRoute,private userService: UserService, private fb: FormBuilder, private router: Router) {
+  }
 
 
   ngOnInit(): void {
-        this.chargerUtilisateur()
-    this.searchFormGroup=this.fb.group({
-        keyword:this.fb.control("")
+    this.chargerUtilisateur()
+    this.searchFormGroup = this.fb.group({
+        keyword: this.fb.control("")
       }
     )
+    this.activatedRoute.params.subscribe(params=>{
+      this.username=params['username']
+      console.log(params)
+    })
+  }
 
+
+  addRoleGestionaireToUser(){
+    this.userService.ajouterRoleGestionaire(this.username).subscribe(
+      {next:data=>{
+          this.chargerUtilisateur();
+        },
+        error: err => {
+          console.log(err)
+        }
+      }
+    )
   }
 
   chargerUtilisateur() {
-    this.utilisateur=this.userService.displayAllUsers().pipe(
+    this.utilisateur = this.userService.displayAllUsers().pipe(
       catchError(err => {
-        this.errorMessage=err.message
+        this.errorMessage = err.message
         return throwError(err)
       })
     )
   }
 
-  supprimerUtilisateur(u:User){
-    let conf=confirm("etes-vous sur .?")
-    if(!conf)return;
+  supprimerUtilisateur(u: User) {
+    let conf = confirm("etes-vous sur .?")
+    if (!conf) return;
     this.userService.deleteUser(u.id).subscribe({
       next: resp => {
         this.chargerUtilisateur();
       },
-      error:err => {
+      error: err => {
         console.log(err)
       }
     })
   }
 
+
   searchUser() {
     let kw = this.searchFormGroup?.value.keyword;
-    this.utilisateur=this.userService.searchUser(kw).pipe(
+    this.utilisateur = this.userService.searchUser(kw).pipe(
       catchError(err => {
-        this.errorMessage=err.message;
+        this.errorMessage = err.message;
         return throwError(err)
       })
     )
   }
-
 }

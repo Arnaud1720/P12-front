@@ -18,7 +18,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AjouterAssociationComponent implements OnInit {
   newAssociationFormGroup!:FormGroup;
 
-  constructor(private auth:AuthService,private activatedRoute:ActivatedRoute,private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
+  constructor(public auth:AuthService,private activatedRoute:ActivatedRoute,private userService:UserService,private fb:FormBuilder,public assoService:AssociationService) { }
 
   ngOnInit(): void {
     this.chargerForm()
@@ -29,6 +29,7 @@ export class AjouterAssociationComponent implements OnInit {
 
     this.newAssociationFormGroup=this.fb.group(
       {
+        numRNA:this.fb.control(null,[Validators.required,Validators.max(9)]),
         nom:this.fb.control(null,[Validators.required,Validators.maxLength(40)]),
         nomPresidentAsso:this.fb.control(null,Validators.required),
         numTelAsso:this.fb.control(null,Validators.required),

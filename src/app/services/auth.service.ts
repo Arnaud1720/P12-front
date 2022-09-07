@@ -21,7 +21,7 @@ export class AuthService {
 
   login(user : User)
   {
-    return this.http.post<HttpResponse<any>>(this.apiURL+'/login', user , {observe:'response'});
+    return this.http.post<HttpResponse<User>>(this.apiURL+'/login', user , {observe:'response'});
   }
 
   saveToken(jwt:string){
