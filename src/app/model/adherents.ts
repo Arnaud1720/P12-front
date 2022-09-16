@@ -10,4 +10,5 @@ export interface Adherents {
   user:User;
   association:Association;
   isAdherent:boolean;
+  email:string;
 }

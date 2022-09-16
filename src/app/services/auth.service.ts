@@ -77,9 +77,7 @@ export class AuthService {
     return this.roles.indexOf('ADHERENT') >=0;
 
   }
-  authToken(){
 
-  }
 
   logout() {
     this.loggedUser = undefined!;

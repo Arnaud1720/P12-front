@@ -1,2 +1,13 @@
-<p>page-activite-detail works!</p>
-<td>  <a class="btn btn-success w-100 " (click)="saveActToAdh()"   ><i class="fa-solid fa-chevron-up"></i>valider</a>
+<div class="container mt-5">
+  <div class="card-header text-info">
+    <h4 class="text-danger">Avertisement</h4>
+
+  </div>
+  <div class="card-body" >
+    Une fois, votre inscription à cette activité validée vous recevrait un email récapitulatif.
+    <a class="btn btn-success w-auto" (click)="saveActToAdh()"   ><i class="fa-solid fa-chevron-up"></i>valider</a>
+    <a class="btn btn-danger w-auto  " [routerLink]="['/']"     ><i class="fa-solid fa-chevron-up"></i>anuler</a>
+
+  </div>
+
+</div>

@@ -68,7 +68,7 @@
     <ng-container *ngIf="activites  | async as listAct;else failureOrLoading" >
 
       <div class="card-header shadow mb-4 mt-lg-5 text-center">
-        LISTE DE TOUTE LES ACTIVITE
+        LISTE DE TOUTES LES ACTIVITES
         <div class="card-body">
           <table class="table table-striped">
             <thead>
@@ -77,7 +77,8 @@
               <th>debut</th>
               <th>fin</th>
               <th>description</th>
-              <th>adherent</th>
+              <th *ngIf="authService.isAdherent()">inscription</th>
+              <!--              <th *ngIf="authService.isGestionaire()">supprimer activité</th>-->
 
 
             </tr>
@@ -88,12 +89,9 @@
               <td>{{act.dateDebut |date:"dd/MM/yyyy"}}</td>
               <td>{{act.dateFin |date:"dd/MM/yyyy"}}</td>
               <td>{{act.description}}</td>
-              <td *ngFor="let adh of adherent |async">{{adh.id}}
-                <a class="btn btn-success w-100 "[routerLink]="['/act/save/',adh.id,act.id]"   ><i class="fa-solid fa-chevron-up"></i>gestionaire</a>
+              <td *ngFor="let adh  of adherent |async">
+                <a  *ngIf="authService.isAdherent()" class="btn btn-success w-25 " [routerLink]="['/act/save/',adh.id,act.id]"   ><i class="fa-solid fa-check"></i></a>
               </td>
-
-
-<!--              act/save/:idAdh/:idAct-->
 
               <td><button *ngIf="authService.isGestionaire()" class="btn btn-danger" (click)="deleteAct(act)"><i class="fa-solid fa-trash-can"></i></button></td>
 
@@ -121,15 +119,15 @@
   <div class="container  "  *ngIf="showAdh==true">
     <ng-container *ngIf="adherent  | async as listAdh;else failureOrLoading">
       <div  class="card-header shadow mb-4 mt-lg-5 text-center">
-        LISTE DE TOUTE DES Adherent
+        LISTE DE TOUS LES ADHERENTS
         <div class="card-body">
           <table class="table table-striped">
             <thead>
             <tr>
               <th>Id</th>
-              <th>debut</th>
-              <th>fin</th>
-              <th>description</th>
+              <th>Debut</th>
+              <th>Fin</th>
+              <th>Nom</th>
 
 
             </tr>
@@ -140,7 +138,7 @@
               <td>{{adh.licenseStart}}</td>
               <td>{{adh.licenseStop}}</td>
               <td>{{adh.nom}}</td>
-              </tr>
+            </tr>
             </tbody>
           </table>
         </div>

@@ -39,6 +39,7 @@ export class PageAdherentComponent implements OnInit {
   public chargementForm(){
     this.adherentFormGroup=this.fb.group({
         nom:this.fb.control("",Validators.required),
+        email:this.fb.control("",Validators.email)
     })
   }
 
